@@ -4,4 +4,4 @@ var xcomParser = require('./utility/parsesoldiers')(file);
 
 xcomParser.parse();
 
-xcomParser.verifyFile();
+xcomParser.validateFile();

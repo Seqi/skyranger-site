@@ -14,9 +14,11 @@ function xcomPoolParser(path){
   this.offset = 0;
   this.buffer = [];
 
-  // TODO: Replace public functions with actual code
-  this.verifyFile = function(){
-    console.log("verify");
+  this.validateFile = function(){
+      var isValid = require('./xcvalidator')(this.buffer)
+      if (isValid === false){
+        throw new Error("File supplied is not a valid XCOM Character Pool.");
+      }
   }
 
   this.parse = function(){
