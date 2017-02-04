@@ -1,0 +1,19 @@
+The XCOM 2 character creator uses a .bin file to represent individual soldiers.
+Unlike the original XCOM, where you can just dump in names, XCOM 2 requires a
+full specification of a soldier's customisation to import them into the game.
+
+This file aims to document the patterns identifiable from the .bin files, and
+how to change/create these files to allow us to modify our soldiers.
+
+Points to note:
+
+All files begin with 4 bytes of value [FF FF FF FF].
+
+All strings are length-prefixed using a 32 bit unsigned integer using little
+endian, and this length includes the null terminator. For example, the following
+sequence:
+
+  [07 00 00 00] [61 61 61 61 61 61] [00] 
+
+means "the following string is 7 bytes long." We can then assume the next 6
+bytes are characters of the string (byte 7 is the null terminator).
