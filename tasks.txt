@@ -1,5 +1,0 @@
-Figure out how the heck binary files work
-
-Sort out the difference to work out what needs to be done to generate the soldiers
-
-Do some twitter stuff?

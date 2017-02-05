@@ -3,5 +3,3 @@ var file = "./template/Demo.bin";
 var xcomParser = require('./utility/parsesoldiers')(file);
 
 xcomParser.parse();
-
-xcomParser.validateFile();
