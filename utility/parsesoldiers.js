@@ -20,54 +20,70 @@ function xcomPoolParser(path){
     this.read();
   }
 
-  this.read = function(){
-    var str = "";
-    while(this.offset < this.buffer.length){
-      var strLength = this.readStringLength();
-      if (strLength >= 4){
-        str += this.buffer.toString("utf8", this.offset, this.offset + strLength - 1);
-        this.offset += strLength;
-      }
-
-      console.log();
-    }
-
-    console.log(str);
+  this.validateFile = function(){
+    // Character pool bins all have an FF FF FF FF prefix
+    this.skipBuffer(Buffer.from([255, 255, 255, 255]).readUInt32LE());
   }
 
-  this.readStringLength = function(){
+  this.read = function(){
+      this.readHeader();
+  }
+
+  this.readHeader = function(){
+    // Read "CharacterPool"
+    this.readString();
+    // Skip tab
+    this.skipBuffer();
+    // Read "ArrayProperty"
+    this.readString();
+    this.parseArrayProperty();
+    // Read "PoolFileName"
+    this.readString();
+    this.skipBuffer();
+    // Read "StrProperty"
+    this.readString();
+    // Skip tab
+    this.offset += 12;
+    // Read file location
+    this.readString();
+  }
+
+  this.parseStringProperty = function(){
+
+  }
+
+  this.parseArrayProperty = function(){
+      // Skip 3 bytes
+      this.offset += 12;
+      var arraySize = this.readInt();
+      console.log("array size: " + arraySize);
+  }
+
+  this.readInt = function(){
     var length = this.buffer.readUInt32LE(this.offset);
-
-    console.log(this.buffer[this.offset].toString() +
-    " " + this.buffer[this.offset + 1].toString() +
-    " " + this.buffer[this.offset + 2].toString() +
-    " " + this.buffer[this.offset + 3].toString());
-
-
-    console.log("shifting by: " + length);
-
+    console.log(this.buffer.slice(this.offset, this.offset + 4));
     this.shiftOffset();
     return length;
   }
 
-  // Attempts to skip a 4 byte buffer, ensuring the value is empty.
-  this.skipZeroBuffer = function(){
-    var bufferVal = buffer.readUInt32LE(this.offset);
-    if (bufferVal !== 0){
-      throw new Error("Attempted to move past a non-zero")
-    }
-    this.shiftOffset();
+  this.readString = function(){
+    var length = this.readInt();
+
+    var strBuffer = this.buffer.slice(this.offset, this.offset + length - 1);
+    var val = strBuffer.toString("utf8");
+
+    console.log(strBuffer);
+    console.log(val);
+    console.log(length);
+    this.shiftOffset(length);
+    return val;
   }
 
-  // Character pool bins all have an FF FF FF FF prefix, ensure this is the case
-  // TODO: This is basically skipZeroBuffer but 255 instead of 0. Refactor this.
-  this.validateFile = function(){
-    var xcomBinPrefix = Buffer.from([255, 255, 255, 255]);
-    var prefix = this.buffer.slice(0, 4);
-
-    var isValid = xcomBinPrefix.equals(prefix);
-    if (isValid === false){
-      throw new Error("File supplied is not a valid XCOM Character Pool.");
+  // Attempts to skip a 4 byte buffer, ensuring the value matches (default 0).
+  this.skipBuffer = function(expectedVal = 0){
+    var bufferVal = this.buffer.readUInt32LE(this.offset);
+    if (bufferVal !== expectedVal){
+      throw new Error("Attempted to move past a non-zero")
     }
     this.shiftOffset();
   }
@@ -75,7 +91,6 @@ function xcomPoolParser(path){
   this.shiftOffset = function(count){
     // If a value was not provided, shift by the standard 4 bytes
     this.offset += (count || 4);
-    console.log("shifting by " + (count || 4));
   }
 
   this.load = function(path){
