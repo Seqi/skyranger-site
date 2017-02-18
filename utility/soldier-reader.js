@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 var propertiesTested = 0;
-var propertiesToTestCount = 35;
+var propertiesToTestCount = 52;
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
@@ -97,6 +97,12 @@ function xcomPoolParser(path){
           console.log("Value: " + prop.val);
           break;
 
+        case "BoolProperty":
+          prop.weirdNum = this.readInt();
+          this.skipValue();
+          this.val = this.readBool();
+          break;
+
         case "ArrayProperty":
           prop.weirdNum = this.readInt();
           console.log("Weird Num: " + prop.weirdNum);
@@ -143,6 +149,21 @@ function xcomPoolParser(path){
     var length = this.buffer.readUInt32LE(this.offset);
     this.skipBytes();
     return length;
+  }
+
+  this.readBool = function(){
+    var falseVal = Buffer.from([00]);
+    var trueVal = Buffer.from([01]);
+
+    var boolVal = this.buffer.slice(this.offset, this.offset + 1);
+    if (boolVal === trueVal){
+      return true;
+    }
+    else if (boolVal === falseVal){
+      return false;
+    }
+    else throw new Error("Could not read bool value");
+
   }
 
   // Attempts to skip a 4 byte buffer, ensuring the value matches (default 0).

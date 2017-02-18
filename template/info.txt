@@ -49,10 +49,14 @@ Format:
 
     [Random Integer] [Tab] [Integer (Value)]
 
+  BoolProperty
+
+    [Random Integer] [Tab] [Byte (01 or 00)]
+
   NameProperty
 
     [Random Integer] [Tab] [Prefixed String (Name Property)] [Tab]
 
   StructProperty
 
-    [Struct Length] [Tab] [Prefixed String (Struct Name)] [Tab]
+    [Struct Length] [Tab] [Prefixed String (Struct Name)] [Random Integer (usually 0)]
