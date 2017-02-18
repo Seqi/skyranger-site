@@ -2,9 +2,6 @@
 // things are commented. Said things may be incorrect. If so, correct me!
 var fs = require('fs');
 
-var propertiesTested = 0;
-var propertiesToTestCount = 52;
-
 var isParsingStruct = false;
 
 // This is the public object that is passed back, exposing any functions
@@ -57,9 +54,7 @@ function xcomPoolParser(path){
   }
 
   this.isEndOfFile = function(){
-    // TESTING PURPOSES:
-    return propertiesTested++ >= propertiesToTestCount;
-    //return this.offset >= this.buffer.length;
+    return this.offset >= this.buffer.length;
   }
 
   this.getNextProperty = function(){
@@ -110,8 +105,10 @@ function xcomPoolParser(path){
 
         case "BoolProperty":
           prop.weirdNum = this.readInt();
+          console.log("Weird Num: " + prop.weirdNum);
           this.skipValue();
-          this.val = this.readBool();
+          prop.val = this.readBool();
+          console.log("Value: " + prop.val);
           break;
 
         case "ArrayProperty":
@@ -168,10 +165,12 @@ function xcomPoolParser(path){
     var trueVal = Buffer.from([01]);
 
     var boolVal = this.buffer.slice(this.offset, this.offset + 1);
-    if (boolVal === trueVal){
+    this.skipBytes(1);
+
+    if (boolVal.equals(trueVal)){
       return true;
     }
-    else if (boolVal === falseVal){
+    else if (boolVal.equals(falseVal)){
       return false;
     }
     else throw new Error("Could not read bool value");
