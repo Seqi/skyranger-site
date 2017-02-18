@@ -55,4 +55,4 @@ Format:
 
   StructProperty
 
-    [Struct Length] [Tab] [Prefixed String (Struct Name)]
+    [Struct Length] [Tab] [Prefixed String (Struct Name)] [Tab]

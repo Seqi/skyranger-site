@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 var propertiesTested = 0;
-var propertiesToTestCount = 6;
+var propertiesToTestCount = 35;
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
@@ -20,10 +20,11 @@ function xcomPoolParser(path){
     while (!this.isEndOfFile()){
 
       // TODO: Handle "None" separator. For now we just dump everything here
-      props.push(this.getNextProperty());
+      var prop = this.getNextProperty();
+      props.push(prop);
     }
 
-    this.debugPrint(props);
+    //this.debugPrint(props);
   }
 
   this.debugPrint = function(props){
@@ -62,34 +63,70 @@ function xcomPoolParser(path){
   this.getNextProperty = function(){
       var prop = {};
 
+      console.log("Offset: " + this.offset);
       prop.name = this.readString();
+      console.log("Name: " + prop.name)
       this.skipValue();
 
       // "None" acts as a separator between header/soldier and each soldier
-      if (prop.name == "None"){
+      if (prop.name === "None"){
         this.readInt();
         return prop;
       }
-
       prop.type  = this.readString();
+      console.log("Type: " + prop.type);
       this.skipValue();
+
 
       // TODO: Refactor
       switch(prop.type){
 
         case "StrProperty":
           prop.weirdNum = this.readInt();
+          console.log("Weird Num: " + prop.weirdNum);
           this.skipValue();
           prop.val = this.readString();
+          console.log("Value: " + prop.val);
+          break;
+
+        case "IntProperty":
+          prop.weirdNum = this.readInt();
+          console.log("Weird Num: " + prop.weirdNum);
+          this.skipValue();
+          prop.val = this.readInt();
+          console.log("Value: " + prop.val);
           break;
 
         case "ArrayProperty":
           prop.weirdNum = this.readInt();
+          console.log("Weird Num: " + prop.weirdNum);
           this.skipValue();
           prop.val = this.readInt();
+          console.log("Value: " + prop.val);
+          break;
+
+        case "NameProperty":
+          prop.weirdNum = this.readInt();
+          console.log("Weird Num: " + prop.weirdNum);
+          this.skipValue();
+          prop.val = this.readString();
+          console.log("Value: " + prop.val);
+
+          // TODO: Find out why this int is at the name of every NameProperty
+          // Other than one instance found so far, this num is 0
+          this.readInt();
+          break;
+
+        case "StructProperty":
+          prop.weirdNum = this.readInt();
+          console.log("Weird Num: " + prop.weirdNum);
+          this.skipValue();
+          prop.val = this.readString();
+          console.log("Value: " + prop.val);
+          this.skipValue();
           break;
       }
-
+      console.log();
       return prop;
   }
 
@@ -110,13 +147,10 @@ function xcomPoolParser(path){
 
   // Attempts to skip a 4 byte buffer, ensuring the value matches (default 0).
   this.skipValue = function(expectedVal = 0){
-    var bufferVal = this.buffer.readUInt32LE(this.offset);
+    var bufferVal = this.readInt();
     if (bufferVal !== expectedVal){
-      throw new Error("Value mismatch." +
-                      " Expected: " + expectedVal +
-                      " Actual: " + bufferVal);
+      throw new Error("Value mismatch. Expected: " + expectedVal + " Got: " + bufferVal);
     }
-    this.skipBytes();
   }
 
   this.skipBytes = function(count){
