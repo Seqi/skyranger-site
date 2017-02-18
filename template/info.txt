@@ -5,44 +5,54 @@ full specification of a soldier's customisation to import them into the game.
 This file aims to document the patterns identifiable from the .bin files, and
 how to change/create these files to allow us to modify our soldiers.
 
-Points to note:
+// TODO: Find out what the random integer actually represents
+// TODO: Further research the StructProperty, how it is formatted
 
-All files begin with 4 bytes of value [FF FF FF FF].
+File Header:
 
-All strings are length-prefixed using a 32 bit unsigned integer using little
-endian, and this length includes the null terminator. For example, the following
-sequence:
+  All files begin with 4 bytes of value [FF FF FF FF].
 
-  [07 00 00 00] [61 61 61 61 61 61] [00]
+Length Prefixed Strings:
 
-means "the following string is 7 bytes long." We can then assume the next 6
-bytes are characters of the string (byte 7 is the null terminator).
+  All strings are length-prefixed using a 32 bit unsigned integer using little
+  endian, and this length includes the null terminator. For example, the following
+  sequence:
+
+    [07 00 00 00] [61 61 61 61 61 61] [00]
+
+  means "the following string is 7 bytes long." We can then assume the next 6
+  bytes are characters of the string (byte 7 is the null terminator).
+
+'None' Separator:
+
+  The header is separated from the soldier list by the "None" value. This value
+  is also used to separate soldiers in the soldier array.
 
 Format:
 
-Each data type follows a specific format, usually revolving around number of
-tabs after an item. The general formula is:
+  Each data type follows a specific format, usually revolving around number of
+  tabs after an item. The general formula is:
 
-[PropertyName] [Tab] [Property Type] [Tab] [Type-Based Handler]
+  [PropertyName] [Tab] [Property Type] [Tab] [Type-Based Handler]
 
-This applies to each property type as such:
+  This applies to each property type as such:
 
-ArrayProperty
+  ArrayProperty
 
-  [Random Integer] [Tab] [Integer (Array Length)]
+    [Random Integer] [Tab] [Integer (Array Length)]
 
-StrProperty
+  StrProperty
 
-  [Random Integer] [Tab] [Prefixed String (Value)]
+    [Random Integer] [Tab] [Prefixed String (Value)]
 
-IntProperty
+  IntProperty
 
-  [Random Integer] [Tab] [Integer (Value)]
+    [Random Integer] [Tab] [Integer (Value)]
 
-NameProperty
+  NameProperty
 
-  [Random Integer] [Tab] [Prefixed String (Name Property)] [Tab]
+    [Random Integer] [Tab] [Prefixed String (Name Property)] [Tab]
 
-StructProperty
+  StructProperty
 
-  [Struct Length] [Tab] [Prefixed String (Struct Name)]
+    [Struct Length] [Tab] [Prefixed String (Struct Name)]
