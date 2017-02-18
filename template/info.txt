@@ -13,7 +13,36 @@ All strings are length-prefixed using a 32 bit unsigned integer using little
 endian, and this length includes the null terminator. For example, the following
 sequence:
 
-  [07 00 00 00] [61 61 61 61 61 61] [00] 
+  [07 00 00 00] [61 61 61 61 61 61] [00]
 
 means "the following string is 7 bytes long." We can then assume the next 6
 bytes are characters of the string (byte 7 is the null terminator).
+
+Format:
+
+Each data type follows a specific format, usually revolving around number of
+tabs after an item. The general formula is:
+
+[PropertyName] [Tab] [Property Type] [Tab] [Type-Based Handler]
+
+This applies to each property type as such:
+
+ArrayProperty
+
+  [Random Integer] [Tab] [Integer (Array Length)]
+
+StrProperty
+
+  [Random Integer] [Tab] [Prefixed String (Value)]
+
+IntProperty
+
+  [Random Integer] [Tab] [Integer (Value)]
+
+NameProperty
+
+  [Random Integer] [Tab] [Prefixed String (Name Property)] [Tab]
+
+StructProperty
+
+  [Struct Length] [Tab] [Prefixed String (Struct Name)]
