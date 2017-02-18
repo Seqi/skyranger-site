@@ -2,6 +2,7 @@
 // things are commented. Said things may be incorrect. If so, correct me!
 var fs = require('fs');
 
+var isParsingCharacter = false;
 var isParsingStruct = false;
 
 // This is the public object that is passed back, exposing any functions
@@ -73,8 +74,15 @@ function xcomPoolParser(path){
         if (isParsingStruct){
           isParsingStruct = false;
         }
+
+        // If we are parsing a character and not a struct, we don't want to
+        // read in the int
+        else if (isParsingCharacter){
+          isParsingCharacter = false;
+        }
         else{
           this.readInt();
+          isParsingCharacter = true;
         }
 
         return prop;
