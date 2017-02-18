@@ -5,6 +5,8 @@ var fs = require('fs');
 var propertiesTested = 0;
 var propertiesToTestCount = 52;
 
+var isParsingStruct = false;
+
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
 function xcomPoolParser(path){
@@ -70,7 +72,16 @@ function xcomPoolParser(path){
 
       // "None" acts as a separator between header/soldier and each soldier
       if (prop.name === "None"){
-        this.readInt();
+
+        // If we are parsing a struct and hit 'None', it is the end of the
+        // struct, so we handle by not reading in the random integer suffix
+        if (isParsingStruct){
+          isParsingStruct = false;
+        }
+        else{
+          this.readInt();
+        }
+
         return prop;
       }
       prop.type  = this.readString();
@@ -130,6 +141,7 @@ function xcomPoolParser(path){
           prop.val = this.readString();
           console.log("Value: " + prop.val);
           this.skipValue();
+          isParsingStruct = true;
           break;
       }
       console.log();
