@@ -24,9 +24,9 @@ function xcomPoolParser(path){
 	if (prop.name == "None"){
 	     // The first 'None' denotes the end of the header, followed by an int
 	     if (isReadingHeader){
-                 console.log("now parsing character");
+                 console.log("Finished reading header");
                  this.readInt();
-                 isReadingCharacter = true;
+                 isReadingHeader = false;
              }
 
 	     // If we are parsing a struct and hit 'None', it is the end of the
@@ -85,7 +85,6 @@ function xcomPoolParser(path){
       prop.type  = this.readString();
       console.log("Type: " + prop.type);
       this.skipValue();
-
 
       // TODO: Refactor
       switch(prop.type){
@@ -190,7 +189,7 @@ function xcomPoolParser(path){
 
   this.skipBytes = function(count){
     // If a value was not provided, shift by the standard 4 bytes
-    this.offset += (count > 0 ? count : 4); 
+    this.offset += (count >= 0 ? count : 4); 
   }
 }  
 
