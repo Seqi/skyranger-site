@@ -2,10 +2,6 @@
 // things are commented. Said things may be incorrect. If so, correct me!
 var fs = require('fs');
 
-var isReadingHeader = true;
-var isReadingCharacter = false;
-var isReadingStruct = false;
-
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
 function xcomPoolParser(path){
@@ -13,6 +9,10 @@ function xcomPoolParser(path){
   this.buffer = [];
 
   this.getSoldiers = function(){
+    var isReadingHeader = true;
+    var isReadingCharacter = false;
+    var isReadingStruct = false;
+
     this.load(path);
 
     // Using this "get next property" format as it lets me process the file
@@ -20,7 +20,7 @@ function xcomPoolParser(path){
     var props = [];
     while (!this.isEndOfFile()){
         var prop = this.getNextProperty();
-	
+
 	if (prop.name == "None"){
 	     // The first 'None' denotes the end of the header, followed by an int
 	     if (isReadingHeader){
@@ -34,7 +34,7 @@ function xcomPoolParser(path){
              if (isReadingStruct){
                  console.log("no longer parsing struct");
                  isReadingStruct = false;
-             }        
+             }
 
             // If we are parsing a character and not a struct, we don't want to
             // read in the int
@@ -79,6 +79,7 @@ function xcomPoolParser(path){
 
       // "None" acts as a separator between header/soldier and each soldier
       if (prop.name === "None"){
+        console.log();
         return prop;
       }
 
@@ -189,9 +190,9 @@ function xcomPoolParser(path){
 
   this.skipBytes = function(count){
     // If a value was not provided, shift by the standard 4 bytes
-    this.offset += (count >= 0 ? count : 4); 
+    this.offset += (count >= 0 ? count : 4);
   }
-}  
+}
 
 
 module.exports = function(path){
