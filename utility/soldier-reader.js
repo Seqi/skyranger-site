@@ -18,23 +18,32 @@ function xcomPoolParser(path){
     // property by property for testing purposes.
     var props = [];
     while (!this.isEndOfFile()){
+        var prop = this.getNextProperty();
+	
+	if (prop.name == "None"){
+	     // If we are parsing a struct and hit 'None', it is the end of the
+             // struct, so we handle by not reading in the random integer suffix
+             if (isParsingStruct){
+                 console.log("no longer parsing struct");
+                 isParsingStruct = false;
+             }        
 
-      // TODO: Handle "None" separator. For now we just dump everything here
-      var prop = this.getNextProperty();
+            // If we are parsing a character and not a struct, we don't want to
+            // read in the int
+            else if (isParsingCharacter){
+              console.log("no longer parsing character");
+              isParsingCharacter = false;
+            }
+
+            else{
+              console.log("now parsing character");
+              this.readInt();
+              isParsingCharacter = true;
+            }
+      }
+
       props.push(prop);
     }
-
-    //this.debugPrint(props);
-  }
-
-  this.debugPrint = function(props){
-      for(var i = 0; i < props.length; i++){
-        console.log("Name: " + props[i].name)
-        console.log("Type: " + props[i].type);
-        console.log("Value: " + props[i].val);
-        console.log("Weird Num: " + props[i].weirdNum);
-        console.log();
-      }
   }
 
   this.load = function(path){
@@ -68,25 +77,9 @@ function xcomPoolParser(path){
 
       // "None" acts as a separator between header/soldier and each soldier
       if (prop.name === "None"){
-
-        // If we are parsing a struct and hit 'None', it is the end of the
-        // struct, so we handle by not reading in the random integer suffix
-        if (isParsingStruct){
-          isParsingStruct = false;
-        }
-
-        // If we are parsing a character and not a struct, we don't want to
-        // read in the int
-        else if (isParsingCharacter){
-          isParsingCharacter = false;
-        }
-        else{
-          this.readInt();
-          isParsingCharacter = true;
-        }
-
         return prop;
       }
+
       prop.type  = this.readString();
       console.log("Type: " + prop.type);
       this.skipValue();

@@ -1,4 +1,4 @@
-var file = "./template/Demo.bin";
+var file = "./template/DemoWithTwo.bin";
 // Instantiate the xcom parser with the file
 var soldierReader = require('./utility/soldier-reader')(file);
 
