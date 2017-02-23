@@ -19,29 +19,26 @@ function xcomPoolParser(path){
     // property by property for testing purposes.
     var props = [];
     while (!this.isEndOfFile()){
-        var prop = this.getNextProperty();
+      var prop = this.getNextProperty();
 
-	if (prop.name == "None"){
-	     // The first 'None' denotes the end of the header, followed by an int
-	     if (isReadingHeader){
-                 console.log("Finished reading header");
-                 this.readInt();
-                 isReadingHeader = false;
-             }
+      if (prop.name == "None"){
+        // The first 'None' denotes the end of the header, followed by an int
+        if (isReadingHeader){
+          this.readInt();
+          isReadingHeader = false;
+        }
 
-	     // If we are parsing a struct and hit 'None', it is the end of the
-             // struct, so we handle by not reading in the random integer suffix
-             if (isReadingStruct){
-                 console.log("no longer parsing struct");
-                 isReadingStruct = false;
-             }
+        // If we are parsing a struct and hit 'None', it is the end of the
+        // struct, so we handle by not reading in the random integer suffix
+        if (isReadingStruct){
+          isReadingStruct = false;
+        }
 
-            // If we are parsing a character and not a struct, we don't want to
-            // read in the int
-            else if (isReadingCharacter){
-              console.log("no longer parsing character");
-              isReadingCharacter = false;
-            }
+        // If we are parsing a character and not a struct, we don't want to
+        // read in the int
+        else if (isReadingCharacter){
+          isReadingCharacter = false;
+        }
       }
 
       props.push(prop);
@@ -70,82 +67,82 @@ function xcomPoolParser(path){
   }
 
   this.getNextProperty = function(){
-      var prop = {};
+    var prop = {};
 
-      console.log("Offset: " + this.offset);
-      prop.name = this.readString();
-      console.log("Name: " + prop.name)
-      this.skipValue();
+    console.log("Offset: " + this.offset);
+    prop.name = this.readString();
+    console.log("Name: " + prop.name)
+    this.skipValue();
 
-      // "None" acts as a separator between header/soldier and each soldier
-      if (prop.name === "None"){
-        console.log();
-        return prop;
-      }
-
-      prop.type  = this.readString();
-      console.log("Type: " + prop.type);
-      this.skipValue();
-
-      // TODO: Refactor
-      switch(prop.type){
-
-        case "StrProperty":
-          prop.weirdNum = this.readInt();
-          console.log("Weird Num: " + prop.weirdNum);
-          this.skipValue();
-          prop.val = this.readString();
-          console.log("Value: " + prop.val);
-          break;
-
-        case "IntProperty":
-          prop.weirdNum = this.readInt();
-          console.log("Weird Num: " + prop.weirdNum);
-          this.skipValue();
-          prop.val = this.readInt();
-          console.log("Value: " + prop.val);
-          break;
-
-        case "BoolProperty":
-          prop.weirdNum = this.readInt();
-          console.log("Weird Num: " + prop.weirdNum);
-          this.skipValue();
-          prop.val = this.readBool();
-          console.log("Value: " + prop.val);
-          break;
-
-        case "ArrayProperty":
-          prop.weirdNum = this.readInt();
-          console.log("Weird Num: " + prop.weirdNum);
-          this.skipValue();
-          prop.val = this.readInt();
-          console.log("Value: " + prop.val);
-          break;
-
-        case "NameProperty":
-          prop.weirdNum = this.readInt();
-          console.log("Weird Num: " + prop.weirdNum);
-          this.skipValue();
-          prop.val = this.readString();
-          console.log("Value: " + prop.val);
-
-          // TODO: Find out why this int is at the name of every NameProperty
-          // Other than one instance found so far, this num is 0
-          this.readInt();
-          break;
-
-        case "StructProperty":
-          prop.weirdNum = this.readInt();
-          console.log("Weird Num: " + prop.weirdNum);
-          this.skipValue();
-          prop.val = this.readString();
-          console.log("Value: " + prop.val);
-          this.skipValue();
-          isReadingStruct = true;
-          break;
-      }
+    // "None" acts as a separator between header/soldier and each soldier
+    if (prop.name === "None"){
       console.log();
       return prop;
+    }
+
+    prop.type  = this.readString();
+    console.log("Type: " + prop.type);
+    this.skipValue();
+
+    // TODO: Refactor
+    switch(prop.type){
+
+      case "StrProperty":
+      prop.weirdNum = this.readInt();
+      console.log("Weird Num: " + prop.weirdNum);
+      this.skipValue();
+      prop.val = this.readString();
+      console.log("Value: " + prop.val);
+      break;
+
+      case "IntProperty":
+      prop.weirdNum = this.readInt();
+      console.log("Weird Num: " + prop.weirdNum);
+      this.skipValue();
+      prop.val = this.readInt();
+      console.log("Value: " + prop.val);
+      break;
+
+      case "BoolProperty":
+      prop.weirdNum = this.readInt();
+      console.log("Weird Num: " + prop.weirdNum);
+      this.skipValue();
+      prop.val = this.readBool();
+      console.log("Value: " + prop.val);
+      break;
+
+      case "ArrayProperty":
+      prop.weirdNum = this.readInt();
+      console.log("Weird Num: " + prop.weirdNum);
+      this.skipValue();
+      prop.val = this.readInt();
+      console.log("Value: " + prop.val);
+      break;
+
+      case "NameProperty":
+      prop.weirdNum = this.readInt();
+      console.log("Weird Num: " + prop.weirdNum);
+      this.skipValue();
+      prop.val = this.readString();
+      console.log("Value: " + prop.val);
+
+      // TODO: Find out why this int is at the name of every NameProperty
+      // Other than one instance found so far, this num is 0
+      this.readInt();
+      break;
+
+      case "StructProperty":
+      prop.weirdNum = this.readInt();
+      console.log("Weird Num: " + prop.weirdNum);
+      this.skipValue();
+      prop.val = this.readString();
+      console.log("Value: " + prop.val);
+      this.skipValue();
+      isReadingStruct = true;
+      break;
+    }
+    console.log();
+    return prop;
   }
 
   this.readString = function(){
