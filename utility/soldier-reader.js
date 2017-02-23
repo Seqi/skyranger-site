@@ -2,8 +2,9 @@
 // things are commented. Said things may be incorrect. If so, correct me!
 var fs = require('fs');
 
-var isParsingCharacter = false;
-var isParsingStruct = false;
+var isReadingHeader = true;
+var isReadingCharacter = false;
+var isReadingStruct = false;
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
@@ -21,24 +22,25 @@ function xcomPoolParser(path){
         var prop = this.getNextProperty();
 	
 	if (prop.name == "None"){
+	     // The first 'None' denotes the end of the header, followed by an int
+	     if (isReadingHeader){
+                 console.log("now parsing character");
+                 this.readInt();
+                 isReadingCharacter = true;
+             }
+
 	     // If we are parsing a struct and hit 'None', it is the end of the
              // struct, so we handle by not reading in the random integer suffix
-             if (isParsingStruct){
+             if (isReadingStruct){
                  console.log("no longer parsing struct");
-                 isParsingStruct = false;
+                 isReadingStruct = false;
              }        
 
             // If we are parsing a character and not a struct, we don't want to
             // read in the int
-            else if (isParsingCharacter){
+            else if (isReadingCharacter){
               console.log("no longer parsing character");
-              isParsingCharacter = false;
-            }
-
-            else{
-              console.log("now parsing character");
-              this.readInt();
-              isParsingCharacter = true;
+              isReadingCharacter = false;
             }
       }
 
@@ -139,7 +141,7 @@ function xcomPoolParser(path){
           prop.val = this.readString();
           console.log("Value: " + prop.val);
           this.skipValue();
-          isParsingStruct = true;
+          isReadingStruct = true;
           break;
       }
       console.log();
