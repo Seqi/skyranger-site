@@ -188,9 +188,10 @@ function xcomPoolParser(path){
 
   this.skipBytes = function(count){
     // If a value was not provided, shift by the standard 4 bytes
-    this.offset += (count || 4);
+    this.offset += (count > 0 ? count : 4); 
   }
-}
+}  
+
 
 module.exports = function(path){
   return new xcomPoolParser(path);
