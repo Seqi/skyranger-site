@@ -4,7 +4,7 @@ var fs = require('fs');
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
-function xcomPoolParser(path){
+function xcomPoolParser(buffer){
   this.offset = 0;
   this.buffer = [];
 
@@ -13,12 +13,14 @@ function xcomPoolParser(path){
     var isReadingCharacter = false;
     var isReadingStruct = false;
 
-    this.load(path);
+    this.load(buffer);
 
     // Using this "get next property" format as it lets me process the file
     // property by property for testing purposes.
     var props = [];
+    var propCount = 0;
     while (!this.isEndOfFile()){
+      console.log("Prop " + propCount++);
       var prop = this.getNextProperty();
 
       if (prop.name == "None"){
@@ -40,13 +42,14 @@ function xcomPoolParser(path){
           isReadingCharacter = false;
         }
       }
-
-      props.push(prop);
+      else{
+        props.push(prop);
+      }
     }
   }
 
-  this.load = function(path){
-    this.buffer = fs.readFileSync(path);
+  this.load = function(buffer){
+    this.buffer = buffer;
 
     try{
       this.validateFile();
@@ -192,6 +195,6 @@ function xcomPoolParser(path){
 }
 
 
-module.exports = function(path){
-  return new xcomPoolParser(path);
+module.exports = function(buffer){
+  return new xcomPoolParser(buffer);
 }
