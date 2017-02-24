@@ -50,7 +50,8 @@ function xcomPoolParser(inBuffer){
     while(prop.name != "None"){
       header[prop.name] = prop;
       prop = this.getNextProperty();
-    }
+        props.push(prop);
+      }
 
     this.readInt();
     return header;
