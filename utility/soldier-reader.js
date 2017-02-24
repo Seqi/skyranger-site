@@ -8,6 +8,8 @@ function xcomPoolParser(buffer){
   this.offset = 0;
   this.buffer = [];
 
+  const propertyCountPerSoldier = 55;
+
   this.getSoldiers = function(){
     var isReadingHeader = true;
     var isReadingCharacter = false;

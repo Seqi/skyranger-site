@@ -1,9 +1,12 @@
-var fileSingleSoldier = "./template/Demo.bin";
-var fileTwoSoldiers = "./template/DemoWithTwo.bin";
-
-// Instantiate the xcom parser with the file
-var fileBuffer = require('fs').readFileSync(fileSingleSoldier);
 var soldierReader = require('./utility/soldier-reader');
+var soldierWriter = require('./utility/soldier-writer');
 
-var singleSoldier = soldierReader(fileBuffer);
-singleSoldier.getSoldiers();
+var testPerson = {
+  firstName: "First",
+  nickName: "Nick",
+  lastName:  "Last"
+};
+
+soldierWriter(testPerson);
+
+
