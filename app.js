@@ -1,12 +1,10 @@
-var soldierReader = require('./utility/soldier-reader');
-var soldierWriter = require('./utility/soldier-writer');
+var file = "./template/DemoWithTwo.bin";
 
-var testPerson = {
-  firstName: "First",
-  nickName: "Nick",
-  lastName:  "Last"
-};
+// Load in all potential properties
+var props = require('./soldier-properties/all');
+console.log(props);
 
-soldierWriter(testPerson);
+// Instantiate the xcom parser with the file
+var soldierReader = require('./utility/soldier-reader')(file);
 
-
+//soldierReader.getSoldiers();
