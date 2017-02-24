@@ -58,8 +58,7 @@ function xcomPoolParser(inBuffer){
   }
 
   this.load = function(){
-    this.buffer = inBuffer;
-
+    this.buffer = inBuffer;  
     try{
       this.validateFile();
     }
