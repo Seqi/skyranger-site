@@ -6,7 +6,11 @@ function XcomSoldierCreator(name){
 
   this.createSoldier = function(){
     initBuffer();
-    writeString("CharacterPool");
+
+    // Load in the properties
+    var props = require('../soldier-properties/all');
+    props.forEach(writeProperty);
+
     log();
   }
 
@@ -14,6 +18,13 @@ function XcomSoldierCreator(name){
   function initBuffer(){
     buffer = Buffer.from([255, 255, 255, 255]);
     skipBytes();
+  }
+
+  function writeProperty(prop){
+    console.log("writing " + prop.name);
+    writeString(prop.name);
+
+
   }
 
   function writeString(str){
@@ -25,7 +36,9 @@ function XcomSoldierCreator(name){
     var valBuffer = Buffer.from(str, "utf8");
 
     // Concat with a null terminator
-    var result =  Buffer.concat([lengthBuffer, valBuffer, nullTerminator]);
+    var bufferLength = str.length + 5;
+    var bufferArray = [lengthBuffer, valBuffer, nullTerminator];
+    var result =  Buffer.concat(bufferArray, bufferLength);
 
     // Append and move offset
     buffer = Buffer.concat([buffer, result]);
@@ -37,8 +50,32 @@ function XcomSoldierCreator(name){
     skipBytes();
   }
 
+  function writeBool(val){
+    var boolBuffer = Buffer.from(val ? [1] : [0]);
+    buffer = Buffer.concat([buffer, boolBuffer]);
+    skipBytes(1);
+  }
+
+  function writeArray(arr){
+    writeInt(arr);
+  }
+
+  function writeName(name){
+    writeString(name);
+  }
+
+  function writeTab(){
+    var tabBuffer = Buffer.from([0, 0, 0, 0]);
+    appendToBuffer(tabBuffer);
+  }
+
   function skipBytes(count){
      offset += count >= 0 ? count : 4;
+  }
+
+  function appendToBuffer(bytes){
+    buffer = Buffer.concat(buffer, bytes);
+    skipBytes(bytes.length);
   }
 
   function log(){
