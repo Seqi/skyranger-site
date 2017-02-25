@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 var isParsingCharacter = false;
-var isParsingStruct = false;
+var isReadingStruct = false;
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
@@ -12,40 +12,50 @@ function xcomPoolParser(path){
   this.buffer = [];
 
   this.getSoldiers = function(){
-    this.load(path);
+   this.load(path);
 
-    // Using this "get next property" format as it lets me process the file
-    // property by property for testing purposes.
-    var props = [];
-    while (!this.isEndOfFile()){
-        var prop = this.getNextProperty();
+   // Using this "get next property" format as it lets me process the file
+   // property by property for testing purposes.
+   var props = this.readHeader();
+   var soldier = {};
 
-	if (prop.name == "None"){
-	     // If we are parsing a struct and hit 'None', it is the end of the
-             // struct, so we handle by not reading in the random integer suffix
-             if (isParsingStruct){
-                 console.log("no longer parsing struct");
-                 isParsingStruct = false;
-             }
+   while (!this.isEndOfFile()){
+     var prop = this.getNextProperty();
 
-            // If we are parsing a character and not a struct, we don't want to
-            // read in the int
-            else if (isParsingCharacter){
-              console.log("no longer parsing character");
-              isParsingCharacter = false;
-            }
+     if (prop.name == "None"){
+       // If we are parsing a struct and hit 'None', we don't want to push a
+       // new soldier and just ignore it.
+       if (isReadingStruct){
+         isReadingStruct = false;
+       }
 
-            else{
-              console.log("now parsing character");
-              this.readInt();
-              isParsingCharacter = true;
-            }
-      }
+       // If we are parsing a character and not a struct, we want to push the
+       // current soldier to the array
+       else {
+         props.soldiers.push(soldier);
+         soldier = {};
+       }
+     }
+     else{
+       soldier[prop.name] = prop;
+     }
+   }
 
-      props.push(prop);
-    }
-  }
+   return props;
+ }
 
+ this.readHeader = function(){
+   // Create a container for soldiers along with the header
+   var header = {soldiers : []};
+   var prop = this.getNextProperty();
+   while(prop.name != "None"){
+     header[prop.name] = prop;
+     prop = this.getNextProperty();
+   }
+
+   this.readInt();
+   return header;
+}
   this.load = function(path){
     this.buffer = fs.readFileSync(path);
 
