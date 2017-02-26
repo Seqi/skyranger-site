@@ -11,12 +11,11 @@ function XcomSoldierCreator(name){
     var props = require('../soldier-properties/all');
 
     // TODO: Replace with props.forEach after testing
-    var propsToWriteCount = 1;;
+    var propsToWriteCount = 2;
     for(var propCount = 0; propCount < propsToWriteCount; propCount++){
           writeProperty(props[propCount]);
     }
-
-    log();
+    return buffer;
   }
 
   // Initialise the buffer with the constant
@@ -32,15 +31,19 @@ function XcomSoldierCreator(name){
 
     console.log("type " + prop.type);
     writeString(prop.type);
+    writeTab();
 
     var chosenVal = getRandomVal(prop);
+    console.log("chosen " + chosenVal);
     switch(prop.type){
+
       case "StrProperty":
-        writeInt(chosenVal.length + 4);
+        writeInt(chosenVal.length + 5);
         writeTab();
         writeString(chosenVal);
         break;
 
+      case "ArrayProperty":
       case "IntProperty":
         writeInt(4);
         writeTab();
@@ -53,11 +56,8 @@ function XcomSoldierCreator(name){
         writeBool(chosenVal);
         break;
 
-      case "ArrayProperty":
-        break;
-
       case "NameProperty":
-        writeInt(chosenVal.length + 8);
+        writeInt(chosenVal.length + 9);
         break;
 
       case "StructProperty":
@@ -82,8 +82,9 @@ function XcomSoldierCreator(name){
   }
 
   function writeInt(num){
-    buffer.writeUInt32LE(10, 0);
-    skipBytes();
+    var intBuffer = new Buffer(4);
+    intBuffer.writeUInt32LE(num);
+    appendToBuffer(intBuffer);
   }
 
   function writeBool(val){
@@ -114,14 +115,8 @@ function XcomSoldierCreator(name){
   }
 
   function getRandomVal(property){
-    var index = Math.floor(Math.random() * property.length);
+    var index = Math.floor(Math.random() * property.vals.length)
     return property.vals[index];
-  }
-
-  function log(){
-    console.log("Offset: " + offset);
-    console.log("Buffer: " + buffer.toString('hex'));
-    console.log();
   }
 }
 
