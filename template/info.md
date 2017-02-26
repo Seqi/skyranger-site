@@ -7,9 +7,6 @@ full specification of a soldier's customisation to import them into the game.
 This file aims to document the patterns identifiable from the .bin files, and
 how to change/create these files to allow us to modify our soldiers.
 
-// TODO: Find out what the random integer actually represents
-// TODO: Further research the StructProperty, how it is formatted
-
 ## File Header:
 
 All files begin with 4 bytes of value [FF FF FF FF].
@@ -58,10 +55,15 @@ This applies to each property type as such:
 >[Struct Length] [Tab] [Prefixed String (Struct Name)] [Random Integer (usually 0)]
 
 ## 'Random Integer'
-Before each value in the 'Name/Type/Value', a random 32 bit unsigned integer appears. This value seems to be related to the size of the data, but the exact relation is not known to me. How this int is retrieved is based on the propety.
+Before each value in the 'Name/Type/Value', a random 32 bit unsigned integer appears.
+This value relates to the number of bytes the property takes up. For example,
+an IntProperty, a 32 bit unsigned integer always, takes 4 bytes. A length prefixed
+string takes up the string length (1 byte per character), plus 4 for the length
+prefix (a 32 bit unsigned integer). NameProperty has the value 8 as it is the same
+as string, but is followed by a 4 byte zero pad.
 
 ### ArrayProperty
-4
+>4
 
 ### StrProperty
 >[String Length] + 4
