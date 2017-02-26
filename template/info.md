@@ -28,7 +28,6 @@ The header is separated from the soldier list by the "None" value. This value
 is also used to separate soldiers in the soldier array. The first occurrence
 denotes the end of the header, and is followed by a 'tab' and the number of
 soldiers in the array. Each 'None' afterwards is followed only by a tab.
-
 ## Format:
 
 Each data type follows a specific format, usually revolving around number of
@@ -64,10 +63,12 @@ string takes up the string length (1 byte per character), plus 1 for the null
 terminator, plus 4 for the length prefix (a 32 bit unsigned integer). NameProperty has the
 value 9 as it is the same as string, but is followed by a 4 byte zero pad.
 
+
 ### ArrayProperty
 >4
 
 ### StrProperty
+
 >[String Length] + 5
 
 ### IntProperty
