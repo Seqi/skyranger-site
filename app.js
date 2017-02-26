@@ -1,10 +1,26 @@
 var file = "./template/DemoWithTwo.bin";
 
-// Load in all potential properties
-var props = require('./soldier-properties/all');
-console.log(props);
+var soldierWriter = require('./utility/soldier-writer');
+var testPerson = {
+  firstName: "First",
+  nickName: "Nick",
+  lastName: "Last"
+};
 
-// Instantiate the xcom parser with the file
-var soldierReader = require('./utility/soldier-reader')(file);
+var newSoldier = soldierWriter(testPerson)
 
-//soldierReader.getSoldiers();
+// Get official buffer from game and compare the bytes retrieved so far
+var gameBuffer = require('fs').readFileSync(file);
+var expectedBuffer = gameBuffer.slice(0, newSoldier.length);
+
+// Log results
+console.log();
+console.log("---------------Generated---------------")
+console.log(newSoldier.toString('hex'));
+console.log();
+
+console.log('---------------Expecting---------------');
+console.log(expectedBuffer.toString('hex'));
+console.log();
+
+console.log("Is Matching: " + newSoldier.equals(expectedBuffer));
