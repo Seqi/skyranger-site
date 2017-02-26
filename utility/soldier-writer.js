@@ -9,7 +9,12 @@ function XcomSoldierCreator(name){
 
     // Load in the properties
     var props = require('../soldier-properties/all');
-    props.forEach(writeProperty);
+
+    // TODO: Replace with props.forEach after testing
+    var propsToWriteCount = 1;;
+    for(var propCount = 0; propCount < propsToWriteCount; propCount++){
+          writeProperty(props[propCount]);
+    }
 
     log();
   }
@@ -23,8 +28,41 @@ function XcomSoldierCreator(name){
   function writeProperty(prop){
     console.log("writing " + prop.name);
     writeString(prop.name);
+    writeTab();
 
+    console.log("type " + prop.type);
+    writeString(prop.type);
 
+    var chosenVal = getRandomVal(prop);
+    switch(prop.type){
+      case "StrProperty":
+        writeInt(chosenVal.length + 4);
+        writeTab();
+        writeString(chosenVal);
+        break;
+
+      case "IntProperty":
+        writeInt(4);
+        writeTab();
+        writeInt(chosenVal);
+        break;
+
+      case "BoolProperty":
+        writeInt(0);
+        writeTab();
+        writeBool(chosenVal);
+        break;
+
+      case "ArrayProperty":
+        break;
+
+      case "NameProperty":
+        writeInt(chosenVal.length + 8);
+        break;
+
+      case "StructProperty":
+        break;
+    }
   }
 
   function writeString(str){
@@ -40,9 +78,7 @@ function XcomSoldierCreator(name){
     var bufferArray = [lengthBuffer, valBuffer, nullTerminator];
     var result =  Buffer.concat(bufferArray, bufferLength);
 
-    // Append and move offset
-    buffer = Buffer.concat([buffer, result]);
-    skipBytes(result.length);
+    appendToBuffer(result);
   }
 
   function writeInt(num){
@@ -52,8 +88,7 @@ function XcomSoldierCreator(name){
 
   function writeBool(val){
     var boolBuffer = Buffer.from(val ? [1] : [0]);
-    buffer = Buffer.concat([buffer, boolBuffer]);
-    skipBytes(1);
+    appendToBuffer(boolBuffer);
   }
 
   function writeArray(arr){
@@ -74,14 +109,18 @@ function XcomSoldierCreator(name){
   }
 
   function appendToBuffer(bytes){
-    buffer = Buffer.concat(buffer, bytes);
+    buffer = Buffer.concat([buffer, bytes]);
     skipBytes(bytes.length);
+  }
+
+  function getRandomVal(property){
+    var index = Math.floor(Math.random() * property.length);
+    return property.vals[index];
   }
 
   function log(){
     console.log("Offset: " + offset);
-    console.log("Buffer:");
-    console.log(buffer);
+    console.log("Buffer: " + buffer.toString('hex'));
     console.log();
   }
 }
