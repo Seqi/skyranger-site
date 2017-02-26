@@ -25,7 +25,9 @@ bytes are characters of the string (byte 7 is the null terminator).
 ## 'None' Separator:
 
 The header is separated from the soldier list by the "None" value. This value
-is also used to separate soldiers in the soldier array.
+is also used to separate soldiers in the soldier array. The first occurrence
+denotes the end of the header, and is followed by a 'tab' and the number of
+soldiers in the array. Each 'None' afterwards is followed only by a tab.
 
 ## Format:
 

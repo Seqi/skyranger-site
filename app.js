@@ -1,11 +1,13 @@
-var file = "./template/DemoWithTwo.bin";
+var file = "./template/Demo.bin";
 
 var soldierWriter = require('./utility/soldier-writer');
-var testPerson = {
-  firstName: "First",
-  nickName: "Nick",
-  lastName: "Last"
-};
+var testPerson = [
+  {
+    firstName: "Phil",
+    nickName: "'Halloptik'",
+    lastName: ""
+  }
+];
 
 var newSoldier = soldierWriter(testPerson)
 
