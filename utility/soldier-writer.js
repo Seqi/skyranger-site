@@ -1,17 +1,19 @@
-function XcomSoldierCreator(name){
+function XcomSoldierCreator(names){
   var buffer;
   var offset = 0;
 
+  var isWritingHeader = true;
+
   const nullTerminator = Buffer.from([0]);
 
-  this.createSoldier = function(){
+  this.createSoldiers = function(){
     initBuffer();
 
     // Load in the properties
     var props = require('../soldier-properties/all');
 
     // TODO: Replace with props.forEach after testing
-    var propsToWriteCount = 2;
+    var propsToWriteCount = 3;
     for(var propCount = 0; propCount < propsToWriteCount; propCount++){
           writeProperty(props[propCount]);
     }
@@ -28,6 +30,17 @@ function XcomSoldierCreator(name){
     console.log("writing " + prop.name);
     writeString(prop.name);
     writeTab();
+
+    // TODO: Move 'None' handler elsewhere. As we are writing straight
+    // to the buffer, it may not be possible to do it nicely.
+    // If the 'None' is end of header, write the number of soldiers to buffer.
+    if (prop.name === "None"){
+        if (isWritingHeader){
+          writeInt(names.length);
+          isWritingHeader = false;
+        }
+        return;
+    }
 
     console.log("type " + prop.type);
     writeString(prop.type);
@@ -121,5 +134,5 @@ function XcomSoldierCreator(name){
 }
 
 module.exports = function(name){
-  return new XcomSoldierCreator(name).createSoldier();
+  return new XcomSoldierCreator(name).createSoldiers();
 }
