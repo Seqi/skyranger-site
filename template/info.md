@@ -58,15 +58,15 @@ This applies to each property type as such:
 Before each value in the 'Name/Type/Value', a random 32 bit unsigned integer appears.
 This value relates to the number of bytes the property takes up. For example,
 an IntProperty, a 32 bit unsigned integer always, takes 4 bytes. A length prefixed
-string takes up the string length (1 byte per character), plus 4 for the length
-prefix (a 32 bit unsigned integer). NameProperty has the value 8 as it is the same
-as string, but is followed by a 4 byte zero pad.
+string takes up the string length (1 byte per character), plus 1 for the null
+terminator, plus 4 for the length prefix (a 32 bit unsigned integer). NameProperty has the
+value 9 as it is the same as string, but is followed by a 4 byte zero pad.
 
 ### ArrayProperty
 >4
 
 ### StrProperty
->[String Length] + 4
+>[String Length] + 5
 
 ### IntProperty
 >4
@@ -75,4 +75,4 @@ as string, but is followed by a 4 byte zero pad.
 >0
 
 ### NameProperty
->[String Length] + 8
+>[String Length] + 9
