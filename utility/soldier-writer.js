@@ -11,12 +11,8 @@ function XcomSoldierCreator(names){
 
     // Load in the properties
     var props = require('../soldier-properties/all');
+    props.forEach(writeProperty);
 
-    // TODO: Replace with props.forEach after testing
-    var propsToWriteCount = 3;
-    for(var propCount = 0; propCount < propsToWriteCount; propCount++){
-          writeProperty(props[propCount]);
-    }
     return buffer;
   }
 
@@ -71,9 +67,18 @@ function XcomSoldierCreator(names){
 
       case "NameProperty":
         writeInt(chosenVal.length + 9);
+        writeTab();
+        writeString(chosenVal);
+        writeTab();
         break;
 
       case "StructProperty":
+        // TODO: Replace this with the struct length somehow
+        // XCOM 2 doesn't seem to care what value is here however
+        writeInt(2638);
+        writeTab();
+        writeString(chosenVal);
+        writeTab();
         break;
     }
   }
