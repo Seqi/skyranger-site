@@ -67,7 +67,7 @@ function XcomSoldierCreator(name){
 
   function writeString(str){
     // Get the length prefix (+1 for null terminator)
-    var lengthBuffer = new Buffer(4);
+    var lengthBuffer = new Buffer.alloc(4);
     lengthBuffer.writeUInt32LE(str.length + 1);
 
     // Get a binary representation of the text
@@ -82,7 +82,7 @@ function XcomSoldierCreator(name){
   }
 
   function writeInt(num){
-    var intBuffer = new Buffer(4);
+    var intBuffer = Buffer.alloc(4);
     intBuffer.writeUInt32LE(num);
     appendToBuffer(intBuffer);
   }
