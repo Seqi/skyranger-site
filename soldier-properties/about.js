@@ -1,21 +1,41 @@
 var props = [
   {
-    name: "MyStr",
+    name: "strFirstName",
     type: "StrProperty",
     vals: [
-      "Test"
+      "Phil"
     ]
   },
   {
-    name: "MyStr2",
+    name: "strLastName",
     type: "StrProperty",
     vals: [
-      "One",
-      "Two",
-      "Three",
-      "Four"
+      "Lip"
     ]
-  }
+  },
+  {
+    name: "strNickName",
+    type: "StrProperty",
+    vals: [
+      "'Halloptik'"
+    ]
+  },
+  {
+    name: "m_SoldierClassTemplateName",
+    type: "NameProperty",
+    vals: [
+      "Rookie"
+    ]
+  },
+
+  {
+    name: "CharacterTemplateName",
+    type: "NameProperty",
+    vals: [
+      "Soldier"
+    ]
+  },
+
 ]
 
 module.exports = props;
