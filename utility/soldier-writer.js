@@ -69,7 +69,10 @@ function XcomSoldierCreator(names){
         writeInt(chosenVal.length + 9);
         writeTab();
         writeString(chosenVal);
-        writeTab();
+        // Workaround for the weird magic int that appears after
+        // some NamePropertys
+        var magicInt = prop.magic || 0;
+        writeInt(magicInt);
         break;
 
       case "StructProperty":
