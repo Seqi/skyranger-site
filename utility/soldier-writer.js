@@ -1,8 +1,5 @@
-const dynamicPropertiesMap = {
-  "strFirstName" : "firstName",
-  "strLastName" : "lastName",
-  "strNickName" : "nickName"
-};
+
+var propertyBag = require('./propertybag')();
 
 function XcomSoldierCreator(names){
   var buffer;
@@ -14,43 +11,22 @@ function XcomSoldierCreator(names){
 
   this.createSoldiers = function(){
     initBuffer();
-
+    
     // Load the header as a one-off before writing each soldier
-    var props = require('../soldier-properties/header');
-    props.forEach(writeProperty);
+    createHeader();
     names.forEach(createSoldier);
 
     return buffer;
   }
 
+  function createHeader() {
+    var headerProps = propertyBag.getHeaderPropertyBag(names);
+    headerProps.forEach(writeProperty);
+  }
+
   function createSoldier(name){
-    var propertyBag = getSoldierPropertyBag(name);
-    propertyBag.forEach(writeProperty);
-  }
-
-  function getSoldierPropertyBag(name){
-    var props = [].concat(
-      require('../soldier-properties/about'),
-      require('../soldier-properties/appearence')
-    );
-
-    for(var xcomProp in dynamicPropertiesMap){
-      var nameProp = dynamicPropertiesMap[xcomProp];
-      setProperty(xcomProp, name[nameProp], props);
-    }
-
-    return props;
-  }
-
-  function setProperty(key, value, props){
-    props.forEach(function setPropertyIfMatching(prop){
-      if (prop.name === key){
-        // Dynamically set properties should only ever have one value.
-        // However to preven strings being treated as arrays, we push
-        // the values to an array to be selected
-        prop.vals.push(value);
-      }
-    });
+    var soldierProps = propertyBag.getSoldierPropertyBag(name);
+    soldierProps.forEach(writeProperty);
   }
 
   // Initialise the buffer with the constant

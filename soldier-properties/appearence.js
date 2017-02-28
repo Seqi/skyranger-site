@@ -337,7 +337,6 @@ var props = [
     name: "BackgroundText",
     type: "StrProperty",
     vals: [
-     "No one knows anything about Phil because he tweets once a week. Spends most of his time ERPing on Final Fantasy XIV. Seen so much Miqo'te porn that he's slowly moving into furry territory."
     ]
   },
   {
