@@ -24,6 +24,9 @@ function propertyBag(){
       setProperty(xcomProp, name[xcomProp], props);
     }
 
+    // Put a timestamp on the creation
+    setProperty("PoolTimestamp", require('./timestamp')(), props);
+
     return props;
   }
 
