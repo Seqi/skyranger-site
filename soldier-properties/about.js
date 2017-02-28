@@ -3,21 +3,18 @@ var props = [
     name: "strFirstName",
     type: "StrProperty",
     vals: [
-      "Phil"
     ]
   },
   {
     name: "strLastName",
     type: "StrProperty",
     vals: [
-      "Lip"
     ]
   },
   {
     name: "strNickName",
     type: "StrProperty",
     vals: [
-      "'Halloptik'"
     ]
   },
   {

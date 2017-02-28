@@ -1,3 +1,9 @@
+// TODO: Write dynamic properties to the propety array before processing
+// TODO: Populate properties with more values
+// TODO: Differentiate properties between male and female
+// TODO: Write a generated file and import into XCOM 2 to test
+// TODO: Calculate struct length
+
 var file = "./template/Demo.bin";
 
 var soldierWriter = require('./utility/soldier-writer');
@@ -5,7 +11,7 @@ var testPerson = [
   {
     firstName: "Phil",
     nickName: "'Halloptik'",
-    lastName: ""
+    lastName: "Lip"
   }
 ];
 
