@@ -17,7 +17,7 @@ var testPerson = [
 ];
 
 var soldierWriter = require('./utility/soldier-writer');
-var newSoldier = soldierWriter(testPerson)
+var newSoldier = soldierWriter(testPerson);
 
 // Read the new soldier back in to ensure it parses correctly
 var reader = require('./utility/soldier-reader')(newSoldier);

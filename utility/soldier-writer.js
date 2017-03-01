@@ -11,7 +11,7 @@ function XcomSoldierCreator(names){
 
   this.createSoldiers = function(){
     initBuffer();
-    
+
     // Load the header as a one-off before writing each soldier
     createHeader();
     names.forEach(createSoldier);
@@ -36,7 +36,7 @@ function XcomSoldierCreator(names){
   }
 
   function writeProperty(prop){
-    console.log("writing " + prop.name);
+    //console.log("writing " + prop.name);
     writeString(prop.name);
     writeTab();
 
@@ -51,12 +51,12 @@ function XcomSoldierCreator(names){
         return;
     }
 
-    console.log("type " + prop.type);
+    //console.log("type " + prop.type);
     writeString(prop.type);
     writeTab();
 
     var chosenVal = getRandomVal(prop);
-    console.log("chosen " + chosenVal);
+    //console.log("chosen " + chosenVal);
     switch(prop.type){
 
       case "StrProperty":
