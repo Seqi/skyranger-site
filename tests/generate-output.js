@@ -3,26 +3,24 @@ var testPerson = [
     strFirstName: "Test",
     strNickName: "'Please'",
     strLastName: "Person",
+    iGender: 1,
+    spooky: "wew",
     BackgroundText: "Please for the love of god work"
   },
   {
     strFirstName: "Another",
     strNickName: "'Random'",
     strLastName: "Guy",
+    iGender: 0,
     BackgroundText: "Two for two?"
-  },
-  {
-  strFirstName: "aaaaaa",
-  strNickName: "'bb'",
-  strLastName: "cccc",
-  BackgroundText: "CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y "
   }
 ];
 
 var soldierWriter = require('../utility/soldier-writer');
 var newSoldier = soldierWriter(testPerson)
 
-// Log results
-console.log();
-console.log("---------------Generated---------------")
-console.log(newSoldier.toString('hex'));
+// Read the result back in
+var reader = require('../utility/soldier-reader');
+var result = reader(newSoldier).getSoldiers();
+
+console.log(JSON.stringify(result, null, 4));
