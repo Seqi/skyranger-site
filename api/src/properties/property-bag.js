@@ -1,7 +1,7 @@
 function propertyBag(){
 
   this.getHeaderPropertyBag = function(names) {
-    var props = require('../soldier-properties/header');
+    var props = require('./header');
 
     // Create the properties to overwrite
     var headerPropertiesMap =  {
@@ -16,8 +16,8 @@ function propertyBag(){
 
   this.getSoldierPropertyBag = function(name){
     var props = [].concat(
-      require('../soldier-properties/about')(),
-      require('../soldier-properties/appearence')()
+      require('./about')(),
+      require('./appearence')()
     );
 
     // For each gender-specific property, set 'vals' to their (fe)male counterpart
@@ -37,7 +37,7 @@ function propertyBag(){
     }
 
     // Put a timestamp on the creation
-    setProperty("PoolTimestamp", require('./timestamp')(), props);
+    setProperty("PoolTimestamp", require('../utility/timestamp')(), props);
 
     return props;
   }

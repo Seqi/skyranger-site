@@ -22,11 +22,11 @@ var testPerson = [
   }
 ];
 
-var soldierWriter = require('../utility/soldier-writer');
+var soldierWriter = require('../soldier-writer');
 var newSoldier = soldierWriter(testPerson);
 
 var fs = require('fs');
-fs.writeFile("./template/Custom.bin", newSoldier, function(err){
+fs.writeFile("../Custom.bin", newSoldier, function(err){
   if (err){
     console.log("Error " + err);
   }
