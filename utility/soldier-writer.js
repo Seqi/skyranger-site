@@ -4,19 +4,21 @@ var propertyBag = require('./propertybag')();
 function XcomSoldierCreator(names){
   var buffer;
   var offset = 0;
-
   var isWritingHeader = true;
-
   const nullTerminator = Buffer.from([0]);
 
   this.createSoldiers = function(){
     initBuffer();
-    
-    // Load the header as a one-off before writing each soldier
     createHeader();
     names.forEach(createSoldier);
 
     return buffer;
+  }
+
+  // Initialise the buffer with the constant
+  function initBuffer(){
+    buffer = Buffer.from([255, 255, 255, 255]);
+    skipBytes();
   }
 
   function createHeader() {
@@ -27,12 +29,7 @@ function XcomSoldierCreator(names){
   function createSoldier(name){
     var soldierProps = propertyBag.getSoldierPropertyBag(name);
     soldierProps.forEach(writeProperty);
-  }
-
-  // Initialise the buffer with the constant
-  function initBuffer(){
-    buffer = Buffer.from([255, 255, 255, 255]);
-    skipBytes();
+    console.log("---------------------------------------------------------");
   }
 
   function writeProperty(prop){
@@ -56,6 +53,7 @@ function XcomSoldierCreator(names){
     writeTab();
 
     var chosenVal = getRandomVal(prop);
+    console.log("vals: " + prop.vals);
     console.log("chosen " + chosenVal);
     switch(prop.type){
 
@@ -97,6 +95,7 @@ function XcomSoldierCreator(names){
         writeTab();
         break;
     }
+    console.log();
   }
 
   function writeString(str){

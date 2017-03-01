@@ -1,4 +1,6 @@
-var props = [
+function propertyBag(){
+this.properties =
+[
   {
     name: "strFirstName",
     type: "StrProperty",
@@ -32,7 +34,12 @@ var props = [
       "Soldier"
     ]
   },
-
 ]
+}
 
-module.exports = props;
+// We cannot call the function here as it won't instantiate a new instance
+// of the properties. This may be due to Node caching it? If we then call the
+// require as a function later, it will instantiate.
+module.exports = function() {
+  return new propertyBag().properties;
+};

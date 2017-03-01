@@ -16,9 +16,21 @@ function propertyBag(){
 
   this.getSoldierPropertyBag = function(name){
     var props = [].concat(
-      require('../soldier-properties/about'),
-      require('../soldier-properties/appearence')
+      require('../soldier-properties/about')(),
+      require('../soldier-properties/appearence')()
     );
+
+    // For each gender-specific property, set 'vals' to their (fe)male counterpart
+    props.forEach(function populateGenderSpecificValues(prop){
+      if (prop.isGenderSpecific === true){
+        if(name.iGender === 0){
+          prop.vals = prop.femaleVals;
+        }
+        else{
+          prop.vals = prop.maleVals;
+        }
+      }
+    });
 
     for(var xcomProp in name){
       setProperty(xcomProp, name[xcomProp], props);

@@ -1,4 +1,7 @@
-var props = [
+var propertyBag = function(){
+
+  this.properties = 
+[
   {
     name: "kAppearance",
     type: "StructProperty",
@@ -17,7 +20,6 @@ var props = [
     name: "iGender",
     type: "IntProperty",
     vals: [
-      1 // Male
     ]
   },
   {
@@ -30,8 +32,12 @@ var props = [
   {
     name: "nmHaircut",
     type: "NameProperty",
-    vals: [
+    isGenderSpecific: true,
+    maleVals: [
       "MaleHair_Blank"
+    ],
+    femaleVals: [
+      "FemaleHair_Blank"
     ]
   },
   {
@@ -330,7 +336,6 @@ var props = [
     name: "PoolTimestamp",
     type: "StrProperty",
     vals: [
-     "December 24, 2016 - 7:41 PM"
     ]
   },
   {
@@ -343,6 +348,9 @@ var props = [
     // End of character separator
     name: "None"
   }
-]
+];
+}
 
-module.exports = props;
+module.exports = function() {
+  return new propertyBag().properties;
+};
