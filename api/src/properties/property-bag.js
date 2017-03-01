@@ -23,15 +23,11 @@ function propertyBag(){
     // For each gender-specific property, set 'vals' to their (fe)male counterpart
     props.forEach(function populateGenderSpecificValues(prop){
       if (prop.isGenderSpecific === true){
-        if(name.iGender === 0){
-          prop.vals = prop.femaleVals;
-        }
-        else{
-          prop.vals = prop.maleVals;
-        }
+        prop.vals = name.iGender === 0 ? prop.femaleVals : prop.maleVals;
       }
     });
 
+    // Set the overwritable properties
     for(var xcomProp in name){
       setProperty(xcomProp, name[xcomProp], props);
     }

@@ -22,7 +22,7 @@ var testPerson = [
   }
 ];
 
-var soldierWriter = require('../soldier-writer');
+var soldierWriter = require('../src/soldier-writer');
 var newSoldier = soldierWriter(testPerson);
 
 var fs = require('fs');

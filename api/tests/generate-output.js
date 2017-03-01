@@ -16,11 +16,11 @@ var testPerson = [
   }
 ];
 
-var soldierWriter = require('../soldier-writer');
+var soldierWriter = require('../src/soldier-writer');
 var newSoldier = soldierWriter(testPerson)
 
 // Read the result back in
-var reader = require('../soldier-reader');
+var reader = require('../src/soldier-reader');
 var result = reader(newSoldier).getSoldiers();
 
 console.log(JSON.stringify(result, null, 4));
