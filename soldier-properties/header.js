@@ -9,7 +9,7 @@ var props = [
     name: "PoolFileName",
     type: "StrProperty",
     vals: [
-      "CharacterPool\\Importable\\Demo.bin"
+      "CharacterPool\\Importable\\Custom.bin"
     ]
   },
   {
