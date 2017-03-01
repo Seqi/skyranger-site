@@ -10,7 +10,7 @@ var file = "./template/Demo.bin";
 var soldierWriter = require('./utility/soldier-writer');
 var testPerson = [
   {
-    strFirstName: "Phil",
+    strFirstName: "Phil2",
     strNickName: "'Halloptik'",
     strLastName: "Lip",
     BackgroundText: "No one knows anything about Phil because he tweets once a week. Spends most of his time ERPing on Final Fantasy XIV. Seen so much Miqo'te porn that he's slowly moving into furry territory."
@@ -19,18 +19,8 @@ var testPerson = [
 
 var newSoldier = soldierWriter(testPerson)
 
-// Get official buffer from game and compare the bytes retrieved so far
-var gameBuffer = require('fs').readFileSync(file);
-var expectedBuffer = gameBuffer.slice(0, newSoldier.length);
+// Read the new soldier back in to ensure it parses correctly
+var reader = require('./utility/soldier-reader')(newSoldier);
+var output = reader.getSoldiers();
 
-// Log results
-console.log();
-console.log("---------------Generated---------------")
-console.log(newSoldier.toString('hex'));
-console.log();
-
-console.log('---------------Expecting---------------');
-console.log(expectedBuffer.toString('hex'));
-console.log();
-
-console.log("Is Matching: " + newSoldier.equals(expectedBuffer));
+console.log(JSON.stringify(output, null, 4));

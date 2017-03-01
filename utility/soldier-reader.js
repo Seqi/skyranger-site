@@ -4,14 +4,14 @@ var fs = require('fs');
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
-function xcomPoolParser(path){
+function xcomPoolParser(inBuffer){
   this.offset = 0;
   this.buffer = [];
 
   var isReadingStruct = false;
 
   this.getSoldiers = function(){
-    this.load(path);
+    this.load();
 
     // Using this "get next property" format as it lets me process the file
     // property by property for testing purposes.
@@ -56,8 +56,8 @@ function xcomPoolParser(path){
     return header;
   }
 
-  this.load = function(path){
-    this.buffer = fs.readFileSync(path);
+  this.load = function(){
+    this.buffer = inBuffer;
 
     try{
       this.validateFile();
@@ -187,6 +187,6 @@ function xcomPoolParser(path){
 }
 
 
-module.exports = function(path){
-  return new xcomPoolParser(path);
+module.exports = function(inBuffer){
+  return new xcomPoolParser(inBuffer);
 }
