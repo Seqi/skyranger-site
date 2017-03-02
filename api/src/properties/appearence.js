@@ -1,7 +1,6 @@
 var propertyBag = function(){
 
-  this.properties = 
-[
+  this.properties = [
   {
     name: "kAppearance",
     type: "StructProperty",
@@ -12,21 +11,33 @@ var propertyBag = function(){
   {
     name: "nmHead",
     type: "NameProperty",
-    vals: [
-      "LatMale_F"
+    isGenderSpecific: true,
+    maleVals: [
+      "CaucMale_A", "CaucMale_B", "CaucMale_C", "CaucMale_D", "CaucMale_E", "CaucMale_F",
+      "AfrMale_A", "AfrMale_B", "AfrMale_C", "AfrMale_D", "AfrMale_E", "AfrMale_F",
+      "AsnMale_A", "AsnMale_B", "AsnMale_C", "AsnMale_D", "AsnMale_E", "AsnMale_F",
+      "LatMale_A", "LatMale_B", "LatMale_C", "LatMale_D", "LatMale_E", "LatMale_F"
+    ],
+    femaleVals: [
+      "CaucFem_A", "CaucFem_B", "CaucFem_C", "CaucFem_D", "CaucFem_E", "CaucFem_F",
+      "AfrFem_A", "AfrFem_B", "AfrFem_C", "AfrFem_D", "AfrFem_E", "AfrFem_F",
+      "AsnFem_A", "AsnFem_B", "AsnFem_C", "AsnFem_D", "AsnFem_E", "AsnFem_F",
+      "LatFem_A", "LatFem_B", "LatFem_C", "LatFem_D", "LatFem_E", "LatFem_F"
     ]
   },
   {
     name: "iGender",
     type: "IntProperty",
-    vals: [
-    ]
+    vals: []
   },
   {
     name: "iRace",
     type: "IntProperty",
     vals: [
-      3 // Caucasian
+      0, // Caucasian
+      1, // African
+      2, // Asian
+      3 // Latino
     ]
   },
   {
@@ -79,7 +90,9 @@ var propertyBag = function(){
     name: "nmFlag",
     type: "NameProperty",
     vals: [
-      "Country_Germany"
+      "Country_France",
+      "Country_Germany",
+      "Country_Poland",
     ]
   },
   {
@@ -179,6 +192,7 @@ var propertyBag = function(){
     vals: [
       "DefaultEyes"
     ],
+    // This is the only name property with a nagic number. Weird..
     magic: 2
   },
   {

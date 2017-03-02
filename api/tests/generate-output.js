@@ -2,7 +2,7 @@ var testPerson = [
   {
     strFirstName: "Test",
     strNickName: "'Please'",
-    strLastName: "Person",
+    strLastName: "Man",
     iGender: 1,
     spooky: "wew",
     BackgroundText: "Please for the love of god work"
@@ -10,7 +10,7 @@ var testPerson = [
   {
     strFirstName: "Another",
     strNickName: "'Random'",
-    strLastName: "Guy",
+    strLastName: "Lady",
     iGender: 0,
     BackgroundText: "Two for two?"
   }
