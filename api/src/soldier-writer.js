@@ -1,5 +1,4 @@
-
-var propertyBag = require('./properties/property-bag')();
+var creator = require('./soldier-creator')();
 
 function XcomSoldierCreator(names){
   var buffer;
@@ -22,18 +21,16 @@ function XcomSoldierCreator(names){
   }
 
   function createHeader() {
-    var headerProps = propertyBag.getHeaderPropertyBag(names);
+    var headerProps = creator.getHeader(names);
     headerProps.forEach(writeProperty);
   }
 
   function createSoldier(name){
-    var soldierProps = propertyBag.getSoldierPropertyBag(name);
+    var soldierProps = creator.getSoldier(name);
     soldierProps.forEach(writeProperty);
-    console.log("---------------------------------------------------------");
   }
 
   function writeProperty(prop){
-    console.log("writing " + prop.name);
     writeString(prop.name);
     writeTab();
 
@@ -48,38 +45,34 @@ function XcomSoldierCreator(names){
         return;
     }
 
-    console.log("type " + prop.type);
     writeString(prop.type);
     writeTab();
 
-    var chosenVal = getRandomVal(prop);
-    console.log("vals: " + prop.vals);
-    console.log("chosen " + chosenVal);
     switch(prop.type){
 
       case "StrProperty":
-        writeInt(chosenVal.length + 5);
+        writeInt(prop.val.length + 5);
         writeTab();
-        writeString(chosenVal);
+        writeString(prop.val);
         break;
 
       case "ArrayProperty":
       case "IntProperty":
         writeInt(4);
         writeTab();
-        writeInt(chosenVal);
+        writeInt(prop.val);
         break;
 
       case "BoolProperty":
         writeInt(0);
         writeTab();
-        writeBool(chosenVal);
+        writeBool(prop.val);
         break;
 
       case "NameProperty":
-        writeInt(chosenVal.length + 9);
+        writeInt(prop.val.length + 9);
         writeTab();
-        writeString(chosenVal);
+        writeString(prop.val);
         // Workaround for the weird magic int that appears after
         // some NamePropertys
         var magicInt = prop.magic || 0;
@@ -91,11 +84,10 @@ function XcomSoldierCreator(names){
         // XCOM 2 doesn't seem to care what value is here however
         writeInt(0);
         writeTab();
-        writeString(chosenVal);
+        writeString(prop.val);
         writeTab();
         break;
     }
-    console.log();
   }
 
   function writeString(str){
@@ -145,11 +137,6 @@ function XcomSoldierCreator(names){
   function appendToBuffer(bytes){
     buffer = Buffer.concat([buffer, bytes]);
     skipBytes(bytes.length);
-  }
-
-  function getRandomVal(property){
-    var index = Math.floor(Math.random() * property.vals.length)
-    return property.vals[index];
   }
 }
 

@@ -2,8 +2,7 @@ var props = [
   {
     name: "CharacterPool",
     type: "ArrayProperty",
-    vals: [
-    ]
+    vals: []
   },
   {
     name: "PoolFileName",
