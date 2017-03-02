@@ -64,7 +64,8 @@ function creator(){
   }
 
   function getRandomPropertyVal(prop){
-    if(prop.vals){
+    // Only set properties with available values where one hasn't been set
+    if(!prop.val && prop.vals){
       var index = Math.floor(Math.random() * prop.vals.length);
       return prop.vals[index];
     }
