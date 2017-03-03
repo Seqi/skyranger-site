@@ -68,6 +68,7 @@ function creator(){
     var headIndex = (raceIndex * 6) + getRandomNumber(5)
 
     // Manually find the properties and set the value
+    // Is there a better way to find the correct property that isnt O(n)?
     props.forEach(function setRaceVals(prop){
       if (prop.name === "nmHead"){
         prop.val = prop.vals[headIndex];
@@ -90,7 +91,7 @@ function creator(){
   function setRandomPropertyVal(prop){
     // "None" properties have no value
     // Only set properties with available values where one hasn't been set
-    if (prop.name != "None" && (!prop.val)){
+    if (prop.name != "None" && (prop.val == null)){
       prop.val = getRandomPropertyVal(prop);
     }
   }
