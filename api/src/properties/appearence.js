@@ -45,10 +45,14 @@ var propertyBag = function(){
     type: "NameProperty",
     isGenderSpecific: true,
     maleVals: [
-      "MaleHair_Blank"
+      "MaleHair_Blank",
+      "MaleHairShort_A",
+      "MaleHairShort_B",
+
     ],
     femaleVals: [
-      "FemaleHair_Blank"
+      "Female_LongWavy",
+      "FemHair_D"
     ]
   },
   {

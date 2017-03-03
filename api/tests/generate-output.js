@@ -11,7 +11,7 @@ var testPerson = [
     strFirstName: "Another",
     strNickName: "'Random'",
     strLastName: "Lady",
-    iGender: 0,
+    iGender: 2,
     BackgroundText: "Two for two?"
   }
 ];

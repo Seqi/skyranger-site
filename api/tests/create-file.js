@@ -17,7 +17,7 @@ var testPerson = [
   strFirstName: "aaaaaa",
   strNickName: "'bb'",
   strLastName: "cccc",
-  iGender: 0,
+  iGender: 2,
   BackgroundText: "CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y "
   }
 ];

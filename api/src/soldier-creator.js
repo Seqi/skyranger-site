@@ -55,7 +55,7 @@ function creator(){
   // the selected gender of the soldier
   function setGenderPropertyOptions(prop, soldier){
     if (prop.isGenderSpecific === true){
-      prop.vals = soldier.iGender === 0 ? prop.femaleVals : prop.maleVals;
+      prop.vals = soldier.iGender === 2 ? prop.femaleVals : prop.maleVals;
     }
   }
 
