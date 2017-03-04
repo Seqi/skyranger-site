@@ -4,7 +4,7 @@ var writer = require('../src/soldier-writer.js');
 
 var files = [
   "./src/bin/Developers.bin",
-  "./src/bin/ToolReference.bin"
+  "./src/bin/Dump.bin"
 ];
 
 // Collect all soldiers in a flat array
@@ -24,7 +24,7 @@ var propertiesToIgnore = ["strFirstName", "strLastName", "strNickName", "Backgro
 soldiers.forEach(function extractSoldierProperties(soldier){
   for (var prop in soldier){
     // Ignore specific properties that are unique or we don't care to record
-    if (prop.type == "BoolProperty" || 
+    if (prop.type == "BoolProperty" ||
         propertiesToIgnore.indexOf(prop) >= 0){
       continue;
     }
