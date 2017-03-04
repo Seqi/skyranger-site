@@ -1,26 +1,18 @@
-var testPerson = [
-  {
-    strFirstName: "Test",
-    strNickName: "'Please'",
-    strLastName: "Person",
-    iGender: 1,
-    BackgroundText: "Please for the love of god work"
-  },
-  {
-    strFirstName: "Another",
-    strNickName: "'Random'",
-    strLastName: "Guy",
-    iGender: 1,
-    BackgroundText: "Two for two?"
-  },
-  {
-  strFirstName: "aaaaaa",
-  strNickName: "'bb'",
-  strLastName: "cccc",
-  iGender: 2,
-  BackgroundText: "CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y CoolCat M a n g o  B a y "
-  }
-];
+var testPerson = [];
+
+var firstNames = ["Oakley", "Charlie", "Casey", "Jessie", "Skyler"];
+var lastNames = ["Smith", "Adams", "Jackson", "Lowell", "Morgan"];
+
+var soldiersToCreate = process.argv[2] || 1;
+for(var i = 0; i < soldiersToCreate; i++){
+  testPerson.push({
+    strFirstName: firstNames[getRandomNumber(firstNames.length)],
+    strNickName: "'" + i + "'",
+    strLastName: lastNames[getRandomNumber(lastNames.length)],
+    iGender: getRandomNumber(2) + 1,
+    BackgroundText: "wew"
+  });
+}
 
 var soldierWriter = require('../src/soldier-writer');
 var newSoldier = soldierWriter(testPerson);
@@ -33,3 +25,7 @@ fs.writeFile("../Custom.bin", newSoldier, function(err){
 
   console.log("Saved!");
 })
+
+function getRandomNumber(max){
+  return Math.floor(Math.random() * max);
+}
