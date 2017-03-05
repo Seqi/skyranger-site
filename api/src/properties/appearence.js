@@ -189,41 +189,7 @@ var propertyBag = function(){
     name: "nmFlag",
     type: "NameProperty",
     vals: [
-      "Country_USA",
-      "Country_UK",
-      "Country_Ireland",
-      "Country_Greece",
-      "Country_Scotland",
-      "Country_Sweden",
-      "Country_Ukraine",
-      "Country_Italy",
-      "Country_Spain",
-      "Country_Australia",
-      "Country_Poland",
-      "Country_Israel",
-      "Country_Portugal",
-      "Country_Germany",
-      "Country_Mexico",
-      "Country_Norway",
-      "Country_Netherlands",
-      "Country_Canada",
-      "Country_Japan",
-      "Country_SouthKorea",
-      "Country_SouthAfrica",
-      "Country_China",
-      "Country_Russia",
-      "Country_Argentina",
-      "Country_Belgium",
-      "Country_France",
-      "Country_Egypt",
-      "Country_Nigeria",
-      "Country_Brazil",
-      "Country_Turkey",
-      "Country_Columbia",
-      "Country_India",
-      "Country_Iran",
-      "Country_Pakistan",
-      "Country_Venezuela"
+      "None"
     ]
   },
   {
@@ -939,7 +905,7 @@ var propertyBag = function(){
     name: "AllowedTypeDarkVIP",
     type: "BoolProperty",
 
-    // Make DarkVIPs very rare. 
+    // Make DarkVIPs very rare.
     vals: [
       true,
       false,
