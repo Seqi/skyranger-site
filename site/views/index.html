@@ -1,0 +1,38 @@
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Monda" rel="stylesheet">
+  <link href="../scripts/bootstrap-3.3.7-dist/css/bootstrap.css"
+    rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="../styles/index.css">
+  <script type="text/javascript" src="../scripts/ui-controller.js"></script>
+<html>
+<body>
+    <div id="inner-container">
+
+      <div id="static-inner-container">
+        <h1 class="xcom-text">Hello, Commander..</h1>
+        <p>Select your recruitment method..</p>
+
+        <div id="selection-btns">
+          <span id="selection-btns-container">
+            <button type="button"
+              class="btn btn-primary xcom-btn"
+              onclick="showTextInput()">
+              Text</button>
+            <button type="button"
+            class="btn btn-primary xcom-btn"
+            onclick="showTwitterInput()">Twitter</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="init-hidden" id="text-input">
+          <p>Enter your soldier names, separated by new lines.</p>
+          <textarea id="soldier-text-input"></textarea>
+        </div>
+      </div>
+
+    </div>
+</body>
+</html>

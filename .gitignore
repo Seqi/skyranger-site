@@ -1,1 +1,3 @@
 Custom.bin
+site/scripts/bootstrap*
+site/node_modules

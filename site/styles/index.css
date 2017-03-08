@@ -1,0 +1,63 @@
+body{
+  background-color: #000;
+  font-family: "Monda", sans-serif;
+}
+
+p{
+  color: #FFF;
+  text-align: center;
+}
+
+.xcom-text{
+  color: #13D0CA;
+  font-size: 3em;
+  letter-spacing: -3px;
+}
+
+.xcom-btn{
+  font-size: 2em;
+  letter-spacing: -3px;
+  background-color: #000;
+  color: #13D0CA;
+  text-transform: uppercase;
+}
+
+#inner-container{
+  width: 50%;
+  margin: 15% auto;
+  border: 1px solid #13D0CA;
+  padding: 10px;
+}
+
+#static-inner-container p{
+  font-size: 2em;
+}
+
+#selection-btns{
+  text-align: center;
+}
+
+#selection-btns button{
+  min-width: 150px;
+  margin: 0px 10px;
+}
+
+#selection-btns-container{
+  display: inline-block;
+  margin: auto;
+}
+
+.input-container{
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+
+.init-hidden{
+  display: none;
+}
+
+#soldier-text-input{
+  border-radius: 8px;
+  width: 100%;
+  height: 200px;
+}
