@@ -1,6 +1,7 @@
 var fs = require('fs');
-var bodyParser = require('body-parser');
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var app = express();
 
 var server = app.listen(8080, function onSuccessListen(){
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({
 
 // Loads in public resources
 app.use(express.static(__dirname + "/public/styles"));
+app.use(express.static(__dirname + "/public/images"));
 app.use(express.static(__dirname + "/public/scripts"));
 
 
@@ -28,51 +30,27 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
-  // Split the names up
-  if (!req.body){
-    return;
+  // If we retrieved nothing to work with, send user back
+  if (!req.body || !req.body.inputText){
+    return writePageToOutput(res);
   }
 
-  var soldiers = [];
-  var lines = req.body.inputText.split("\n");
+  var soldiers = require('./src/text-parser')(req.body.inputText);
 
-  for(var i = 0; i < lines.length; i++){
-    var parsedName = parseName(lines[i]);
-    if (!parsedName){
-      return console.log("Bad name: " + lines[i]);
-    }
-    soldiers.push(parsedName);
-  }
-
-  console.log(soldiers);
-
+  console.log(JSON.stringify(soldiers, null, 4));
   writePageToOutput(res);
 });
 
-function parseName(name){
-  var segments = name.trim().split(' ');
-  var name = {};
-
-  if (segments.length == 1){
-    return { firstName: segments[0] };
-  }
-  else if (segments.length == 2){
-    return { firstName: segments[0], lastName: segments[1] };
-  }
-  else if (segments.length == 3){
-    return { firstName: segments[0], nickName: segments[1], lastName: segments[2] };
-  }
-  else return null;
-}
 
 function writePageToOutput(response){
   var options = {
     root: __dirname + '/public/views'
   }
 
-  response.sendFile("index.html", options, function(err){
+  response.sendFile("index.html", options, function onSendFileError(err){
     if (err){
       console.log(err);
+      response.end("Error occurred. Try again later.");
     }
   });
 }
