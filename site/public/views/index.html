@@ -1,17 +1,17 @@
 <html>
 <head>
   <link href="https://fonts.googleapis.com/css?family=Monda" rel="stylesheet">
-  <link href="../scripts/bootstrap-3.3.7-dist/css/bootstrap.css"
+  <link href="bootstrap-3.3.7-dist/css/bootstrap.css"
     rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="../styles/index.css">
-  <script type="text/javascript" src="../scripts/ui-controller.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <script type="text/javascript" src="ui-controller.js"></script>
 <html>
 <body>
     <div id="inner-container">
 
       <div id="static-inner-container">
-        <h1 class="xcom-text">Hello, Commander..</h1>
-        <p>Select your recruitment method..</p>
+        <h1 class="xcom-text">Hello, Commander</h1>
+        <p>Select your recruitment method:</p>
 
         <div id="selection-btns">
           <span id="selection-btns-container">
@@ -27,10 +27,17 @@
       </div>
 
       <div class="input-container">
-        <div class="init-hidden" id="text-input">
-          <p>Enter your soldier names, separated by new lines.</p>
-          <textarea id="soldier-text-input"></textarea>
-        </div>
+        <form action="#text" name="input" method="post">
+
+          <div class="init-hidden" id="text-input">
+            <p>Enter your soldier names, separated by new lines.</p>
+            <textarea type="text" name="inputText" id="soldier-text-input"></textarea>
+            <input class="btn btn-primary xcom-btn"
+              type="submit"
+              value="Generate"/>
+          </div>
+
+        </form>
       </div>
 
     </div>
