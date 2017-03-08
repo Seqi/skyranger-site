@@ -1,0 +1,25 @@
+{
+  "name": "xcom2soldierapi",
+  "version": "1.0.0",
+  "description": "An API for reading and creating XCOM2 Character Pool files.",
+  "main": "src/app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "tests/generate-output.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "../.git"
+  },
+  "keywords": [
+    "xcom2",
+    "api"
+  ],
+  "author": "Seqi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.0"
+  }
+}

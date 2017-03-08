@@ -1,6 +1,5 @@
 // NB: To aid with the learning process of node/js, maybe seemingly obvious
 // things are commented. Said things may be incorrect. If so, correct me!
-var fs = require('fs');
 
 // This is the public object that is passed back, exposing any functions
 // the caller might need.
