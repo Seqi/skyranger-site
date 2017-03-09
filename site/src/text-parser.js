@@ -20,21 +20,43 @@ function parseNames(names){
 
 function parseName(name){
   var segments = name.trim().split(' ');
-  var name = {};
 
-  // Currently we have to ensure all properties are populated
-  // TODO: This is pretty lazy, do this properly
-  if (segments.length == 1){
-    return { strFirstName: segments[0], strNickName: "", strLastName: ""};
+  if (segments.length == 0){
+    return null;
   }
-  else if (segments.length == 2){
-    return { strFirstName: segments[0], strNickName: "", strLastName: segments[1] };
+
+  return {
+    strFirstName: getFirstName(segments),
+    strLastname: getLastName(segments),
+    strNickName: getNickName(segments)
+  };
+}
+
+function getFirstName(nameSegments){
+  // We know that nameSegments will have at least one item in as it's
+  // checked prior
+  return nameSegments[0];
+}
+
+function getLastName(nameSegments){
+  // Return blank string if only one name supplied
+  if (nameSegments.length < 2){
+    return "";
   }
-  // Trim any extra names
-  else if (segments.length > 2){
-    return { strFirstName: segments[0], strNickName: segments[1], strLastName: segments[2] };
+
+  return nameSegments[nameSegments.length - 1];
+}
+
+function getNickName(nameSegments){
+  // Nickname would require first and last name already existing
+  if (nameSegments.length < 3){
+    return "";
   }
-  else return null;
+
+  var nick = nameSegments.slice(1, -1).join(' ');
+
+  // Wrap in single quotes
+  return "'" + nick + "'";
 }
 
 module.exports = parseNames;
