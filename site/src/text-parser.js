@@ -6,7 +6,7 @@ function parseNames(names){
     var soldier = parseName(lines[i]);
     if (soldier){
       // Give a random gender
-      soldier.iGender = Math.floor(Math.random() * 2);
+      soldier.iGender = Math.floor(Math.random() * 2) + 1;
 
       // Give an empty Bio
       soldier.BackgroundText = "";
@@ -27,7 +27,7 @@ function parseName(name){
 
   return {
     strFirstName: getFirstName(segments),
-    strLastname: getLastName(segments),
+    strLastName: getLastName(segments),
     strNickName: getNickName(segments)
   };
 }

@@ -35,10 +35,18 @@ app.post('/', function(req, res){
     return writePageToOutput(res);
   }
 
-  var soldiers = require('./src/text-parser')(req.body.inputText);
+  // Create a .bin file from the input
+  var soldierJson = require('./src/text-parser')(req.body.inputText);
+  var soldierWriter = require('../api/src/soldier-writer');
+  var file = soldierWriter(soldierJson);
 
-  console.log(JSON.stringify(soldiers, null, 4));
-  writePageToOutput(res);
+  // Download the file
+  res.writeHead(200, {
+    "Content-Type": "application/octet-stream",
+    "Content-disposition": "attachment;filename=Custom.bin",
+    "Content-Length": file.length
+  });
+  res.end(file);
 });
 
 
