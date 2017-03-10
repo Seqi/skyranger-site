@@ -24,7 +24,7 @@ function updateSoldierCount(){
 
   // Soft disable if too many soldiers
   // Server side check still so no javascript disabling shenanigans!
-  if (soldierCount > 500){
+  if (soldierCount > 500 || soldierCount == 0){
     submitBtn.disabled = true;
   }
   else{

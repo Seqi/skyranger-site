@@ -2,10 +2,10 @@ const MAX_SOLDIERS = 500;
 
 function parseNames(names){
   var soldiers = [];
-  var lines = names.split("\n");
+  var lines = names.trim().split("\n");
 
   console.log("Processing " + lines.length + " soldiers");
-  if (lines.length > MAX_SOLDIERS){
+  if (lines.length > MAX_SOLDIERS || lines.length == 0){
       return null;
   }
 
