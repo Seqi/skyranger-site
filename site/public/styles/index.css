@@ -17,6 +17,10 @@ p{
   text-align: center;
 }
 
+li{
+  color: #FFF;
+}
+
 .xcom-text{
   color: #13D0CA;
   letter-spacing: -3px;
