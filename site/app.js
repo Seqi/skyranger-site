@@ -36,7 +36,7 @@ app.post('/', function(req, res){
   }
 
   // Create a .bin file from the input
-  var soldierJson = require('./src/text-parser')(req.body.inputText);
+  var soldierJson = require('./src/text-parser')(req.body.inputText);  
   var soldierWriter = require('../api/src/soldier-writer');
   var file = soldierWriter(soldierJson);
 

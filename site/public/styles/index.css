@@ -3,6 +3,9 @@ body{
   background-size: cover;
   font-family: "Monda", sans-serif;
 }
+h1{
+  text-align: center;
+}
 
 p{
   color: #FFF;
@@ -11,7 +14,6 @@ p{
 
 .xcom-text{
   color: #13D0CA;
-  font-size: 3em;
   letter-spacing: -3px;
 }
 
@@ -33,9 +35,13 @@ p{
   background-color: rgba(0,0,0, 0.8);
   margin: 20% auto;
   max-width: 800px;
-  border: 1px solid #13D0CA;
+  border: 2px solid #13D0CA;
   padding: 10px;
 
+}
+
+.xlrg-txt{
+  font-size: 4em;
 }
 
 .lrg-txt{
@@ -62,6 +68,10 @@ p{
 #selection-btns-container{
   display: inline-block;
   margin: auto;
+}
+
+#soldier-count{
+  float: right;
 }
 
 .input-container{

@@ -11,7 +11,7 @@
     <div id="inner-container">
 
       <div id="static-inner-container">
-        <h1 class="xcom-text">Hello, Commander</h1>
+        <h1 class="xcom-text xlrg-txt">Hello, Commander</h1>
         <p class="med-txt">Bring your friends into the fray by quickly generating a character
           pool to use within XCOM 2. Draft your Twitter followers, or a
           predefined list of names instantly, so you can spend less time in
@@ -35,14 +35,29 @@
 
         <div class="init-hidden" id="text-input">
           <form action="#text" name="input" method="post">
+
             <p>Enter your soldier names, separated by new lines.</p>
-            <textarea type="text" name="inputText" id="soldier-text-input"></textarea>
+            <p id="soldier-count"><span id="soldier-count-num">0</span> soldiers.</p>
+
+            <textarea
+              type="text"
+              name="inputText"
+              oninput="updateSoldierCount()"
+              id="soldier-text-input">
+            </textarea>
+
             <input class="btn btn-primary xcom-btn"
               type="submit"
               value="Generate"/>
+              
             </form>
         </div>
 
+      </div>
+
+      <div id="install-container">
+        <p>Place the file into your XCOM Character Pool directory (usually
+          %userprofile%\Documents\My Games\XCOM2\XComGame\CharacterPool)
       </div>
 
     </div>
