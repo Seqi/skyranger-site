@@ -8,14 +8,16 @@
 <html>
 <body>
   <div id="container">
-    <div id="inner-container">
+    <div id="main-container" class="content-container">
 
       <div id="static-inner-container">
         <h1 class="xcom-text xlrg-txt">Hello, Commander</h1>
+        <hr/>
         <p class="med-txt">Bring your friends into the fray by quickly generating a character
           pool to use within XCOM 2. Draft your Twitter followers, or a
           predefined list of names instantly, so you can spend less time in
           menus, and more time getting your friends killed.</p>
+        <hr/>
         <p class="lrg-txt">Select your recruitment method:</p>
 
         <div id="selection-btns">
@@ -38,7 +40,7 @@
 
             <p>Enter your soldier names, separated by new lines.</p>
             <textarea
-            name="inputText" 
+            name="inputText"
             oninput="updateSoldierCount()"
             id="soldier-text-input"></textarea>
 
@@ -51,12 +53,12 @@
         </div>
 
       </div>
+    </div>
 
-      <div id="install-container">
-        <p>Place the file into your XCOM Character Pool directory (usually
-          %userprofile%\Documents\My Games\XCOM2\XComGame\CharacterPool)
-      </div>
-
+    <div class="content-container">
+      <h1 class="xcom-text xlrg-txt">Instructions</h1>
+      <p class="med-txt">Place the file into your XCOM Character Pool directory (usually
+        %userprofile%\Documents\My Games\XCOM2\XComGame\CharacterPool)
     </div>
   </div>
 </body>
