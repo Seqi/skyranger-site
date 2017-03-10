@@ -30,13 +30,18 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
+  console.log("Generate request from " + req.connection.remoteAddress);
   // If we retrieved nothing to work with, send user back
   if (!req.body || !req.body.inputText){
     return writePageToOutput(res);
   }
 
-  // Create a .bin file from the input
-  var soldierJson = require('./src/text-parser')(req.body.inputText);  
+  // Create the JSON object for the soldier, doing nothing if too many soldiers
+  var soldierJson = require('./src/text-parser')(req.body.inputText);
+  if (!soldierJson){
+    return writePageToOutput(res);
+  }
+
   var soldierWriter = require('../api/src/soldier-writer');
   var file = soldierWriter(soldierJson);
 

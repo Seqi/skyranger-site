@@ -14,21 +14,20 @@ function updateSoldierCount(){
 
   var lines = input.split('\n');
   for(var i = 0; i < input.split('\n').length; i++){
-    if (lines[i]){
+    if (lines[i] && lines[i].trim().length > 0){
       soldierCount++;
     }
   }
 
-  // Create the text for the generate button
   var submitBtn = document.getElementById("soldier-submit-txt");
   submitBtn.value = "Generate  " + soldierCount + "  soldiers";
 
-  // Disable if too many soldiers
-  if (soldierCount > 100){
+  // Soft disable if too many soldiers
+  // Server side check still so no javascript disabling shenanigans!
+  if (soldierCount > 500){
     submitBtn.disabled = true;
   }
   else{
     submitBtn.disabled = false;
   }
-
 }

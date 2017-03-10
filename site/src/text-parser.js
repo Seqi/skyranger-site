@@ -1,11 +1,12 @@
-const MAX_SOLDIERS = 100;
+const MAX_SOLDIERS = 500;
 
 function parseNames(names){
   var soldiers = [];
   var lines = names.split("\n");
 
-  if (lines > MAX_SOLDIERS){
-      // TODO: Handle error here!
+  console.log("Processing " + lines.length + " soldiers");
+  if (lines.length > MAX_SOLDIERS){
+      return null;
   }
 
   for(var i = 0; i < lines.length; i++){
