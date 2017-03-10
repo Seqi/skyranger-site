@@ -85,6 +85,7 @@ p{
 
 .init-hidden input{
   width: 100%;
+  letter-spacing: -1px;
   font-size: 1em;
   margin-top: 5px;
 }

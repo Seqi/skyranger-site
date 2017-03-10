@@ -37,8 +37,6 @@
           <form action="#text" name="input" method="post">
 
             <p>Enter your soldier names, separated by new lines.</p>
-            <p id="soldier-count"><span id="soldier-count-num">0</span> soldiers.</p>
-
             <textarea
               type="text"
               name="inputText"
@@ -46,10 +44,11 @@
               id="soldier-text-input">
             </textarea>
 
-            <input class="btn btn-primary xcom-btn"
+            <input id="soldier-submit-txt"
+              class="btn btn-primary xcom-btn"
               type="submit"
               value="Generate"/>
-              
+
             </form>
         </div>
 

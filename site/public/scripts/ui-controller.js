@@ -19,5 +19,16 @@ function updateSoldierCount(){
     }
   }
 
-  document.getElementById("soldier-count-num").innerHTML = soldierCount;
+  // Create the text for the generate button
+  var submitBtn = document.getElementById("soldier-submit-txt");
+  submitBtn.value = "Generate  " + soldierCount + "  soldiers";
+
+  // Disable if too many soldiers
+  if (soldierCount > 100){
+    submitBtn.disabled = true;
+  }
+  else{
+    submitBtn.disabled = false;
+  }
+
 }
