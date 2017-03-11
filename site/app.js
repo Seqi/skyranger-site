@@ -2,8 +2,13 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 
+// Build the server
 var app = express();
 
+// Register the twitter module for listening and handling twitter requests
+var twitter = require('./src/twitter')(app);
+
+// Start the server listener
 var server = app.listen(8080, function onSuccessListen(){
   var host = server.address().address;
   var port = server.address().port;
@@ -45,10 +50,6 @@ app.post('/text', function(req, res){
   downloadCharacterPool(res, soldierJson);
 });
 
-app.post('/twitter', function(req, res){
-  console.log("Twitter test");
-  writePageToOutput(res);
-});
 
 function downloadCharacterPool(res, soldierJson){
     var soldierWriter = require('../api/src/soldier-writer');
@@ -62,7 +63,6 @@ function downloadCharacterPool(res, soldierJson){
     });
     res.end(file);
 }
-
 
 function writePageToOutput(response){
   var options = {
