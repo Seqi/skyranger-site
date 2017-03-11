@@ -36,8 +36,7 @@
       <div class="input-container">
 
         <div class="init-hidden" id="text-input">
-          <form action="#text" name="input" method="post">
-
+          <form action="text" name="input" method="post">
             <p>Enter your soldier names, separated by new lines.</p>
             <textarea
             name="inputText"
@@ -49,8 +48,16 @@
               type="submit"
               disabled="true",
               value="Generate 0 soldiers"/>
-
             </form>
+        </div>
+
+        <div class="init-hidden" id="twitter-input">
+          <form action="twitter" name="input" method="post">
+            <input id="soldier-submit-twitter"
+              class="btn btn-primary xcom-btn"
+              type="submit"
+              value="Authenticate"/>
+          </form>
         </div>
 
       </div>

@@ -29,7 +29,7 @@ app.get('/', function(req, res){
   writePageToOutput(res);
 });
 
-app.post('/', function(req, res){
+app.post('/text', function(req, res){
   console.log("Generate request from " + req.connection.remoteAddress);
   // If we retrieved nothing to work with, send user back
   if (!req.body || !req.body.inputText){
@@ -42,17 +42,26 @@ app.post('/', function(req, res){
     return writePageToOutput(res);
   }
 
-  var soldierWriter = require('../api/src/soldier-writer');
-  var file = soldierWriter(soldierJson);
-
-  // Download the file
-  res.writeHead(200, {
-    "Content-Type": "application/octet-stream",
-    "Content-disposition": "attachment;filename=Custom.bin",
-    "Content-Length": file.length
-  });
-  res.end(file);
+  downloadCharacterPool(res, soldierJson);
 });
+
+app.post('/twitter', function(req, res){
+  console.log("Twitter test");
+  writePageToOutput(res);
+});
+
+function downloadCharacterPool(res, soldierJson){
+    var soldierWriter = require('../api/src/soldier-writer');
+    var file = soldierWriter(soldierJson);
+
+    // Download the file
+    res.writeHead(200, {
+      "Content-Type": "application/octet-stream",
+      "Content-disposition": "attachment;filename=Custom.bin",
+      "Content-Length": file.length
+    });
+    res.end(file);
+}
 
 
 function writePageToOutput(response){
