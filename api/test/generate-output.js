@@ -25,6 +25,7 @@ describe('Generated object', function () {
     it('should contain the expected keys', function() {
       expect(result.soldiers[0]).to.have.all.keys(soldierKeys)
     })
+    
     it('each key should contain types of the expected value', function() {
       for (var i of soldierKeys) {
         expect(result.soldiers[0][i]).to.have.all.keys('name', 'type', 'weirdNum', 'val')
@@ -33,6 +34,34 @@ describe('Generated object', function () {
         expect(result.soldiers[0][i].weirdNum).to.be.a('number')
         expect(result.soldiers[0][i].val).to.exist
       }
+    })
+  })
+  
+  describe('CharacterPool', function() {
+    it('should contain the expected keys', function() {
+      expect(result.CharacterPool).to.have.all.keys('name', 'type', 'weirdNum', 'val')
+    })
+    
+    it('each key should contain types of the expected value', function() {
+        expect(result.CharacterPool).to.have.all.keys('name', 'type', 'weirdNum', 'val')
+        expect(result.CharacterPool.name).to.be.a('string')
+        expect(result.CharacterPool.type).to.be.a('string')
+        expect(result.CharacterPool.weirdNum).to.be.a('number')
+        expect(result.CharacterPool.val).to.exist
+    })
+  })
+  
+  describe('PoolFileName', function() {
+    it('should contain the expected keys', function() {
+      expect(result.CharacterPool).to.have.all.keys('name', 'type', 'weirdNum', 'val')
+    })
+    
+    it('each key should contain types of the expected value', function() {
+        expect(result.PoolFileName).to.have.all.keys('name', 'type', 'weirdNum', 'val')
+        expect(result.PoolFileName.name).to.be.a('string')
+        expect(result.PoolFileName.type).to.be.a('string')
+        expect(result.PoolFileName.weirdNum).to.be.a('number')
+        expect(result.PoolFileName.val).to.exist
     })
   })
 })
