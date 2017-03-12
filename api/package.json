@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "An API for reading and creating XCOM2 Character Pool files.",
   "main": "src/app.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "test": "tests/generate-output.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,5 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }
