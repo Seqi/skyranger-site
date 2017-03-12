@@ -1,11 +1,15 @@
 var fs = require('fs');
+var mocha = require('mocha')
+var expect = require('chai').expect
 var reader = require('../src/soldier-reader.js');
 var writer = require('../src/soldier-writer.js');
 
 var files = [
-  "../src/bin/Developers.bin",
-  "../src/bin/Dump.bin"
+  "./src/bin/Developers.bin",
+  "./src/bin/Dump.bin"
 ];
+
+describe('Soldier generator', function() {
 
 // Collect all soldiers in a flat array
 var soldiers = [];
@@ -15,7 +19,9 @@ for (var i = 0; i < files.length; i++){
   soldiers = soldiers.concat(readResult.soldiers);
 }
 
-console.log("Got " + soldiers.length + " soldiers.");
+it('should return the expected number of soldiers', function() {
+  expect(soldiers.length).to.equal(243)
+})
 
 var properties = [];
 var propertiesToIgnore = ["strFirstName", "strLastName", "strNickName", "BackgroundText", "PoolTimestamp"];
@@ -39,4 +45,6 @@ soldiers.forEach(function extractSoldierProperties(soldier){
   }
 });
 
-console.log(properties);
+}) // Soldier generator test close
+
+//console.log(properties);
