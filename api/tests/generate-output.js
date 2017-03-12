@@ -1,20 +1,4 @@
-var testPerson = [
-  {
-    strFirstName: "Test",
-    strNickName: "'Please'",
-    strLastName: "Man",
-    iGender: 1,
-    spooky: "wew",
-    BackgroundText: "Please for the love of god work"
-  },
-  {
-    strFirstName: "Another",
-    strNickName: "'Random'",
-    strLastName: "Lady",
-    iGender: 2,
-    BackgroundText: "Two for two?"
-  }
-];
+var testPerson = require('./testData').testPerson
 
 var soldierWriter = require('../src/soldier-writer');
 var newSoldier = soldierWriter(testPerson)
