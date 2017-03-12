@@ -16,6 +16,62 @@ var testPerson = [
   }
 ];
 
+var soldierKeys = [
+  'strFirstName',
+  'strLastName',
+  'strNickName',
+  'm_SoldierClassTemplateName',
+  'CharacterTemplateName',
+  'kAppearance',
+  'nmHead',
+  'iGender',
+  'iRace',
+  'nmHaircut',
+  'iHairColor',
+  'iFacialHair',
+  'nmBeard',
+  'iSkinColor',
+  'iEyeColor',
+  'nmFlag',
+  'iVoice',
+  'iAttitude',
+  'iArmorDeco',
+  'iArmorTint',
+  'iArmorTintSecondary',
+  'iWeaponTint',
+  'iTattooTint',
+  'nmWeaponPattern',
+  'nmPawn',
+  'nmTorso',
+  'nmArms',
+  'nmLegs',
+  'nmHelmet',
+  'nmEye',
+  'nmTeeth',
+  'nmFacePropLower',
+  'nmFacePropUpper',
+  'nmPatterns',
+  'nmVoice',
+  'nmLanguage',
+  'nmTattoo_LeftArm',
+  'nmTattoo_RightArm',
+  'nmScars',
+  'nmTorso_Underlay',
+  'nmArms_Underlay',
+  'nmLegs_Underlay',
+  'nmFacePaint',
+  'nmLeftArm',
+  'nmRightArm',
+  'nmLeftArmDeco',
+  'nmRightArmDeco',
+  'Country',
+  'AllowedTypeSoldier',
+  'AllowedTypeVIP',
+  'AllowedTypeDarkVIP',
+  'PoolTimestamp',
+  'BackgroundText'
+]
+
 function generateSoldiers(num) {
   var testPerson = [];
 
@@ -42,5 +98,6 @@ function getRandomNumber(max){
 
 module.exports = {
   testPerson,
+  soldierKeys,
   generateSoldiers
 }
