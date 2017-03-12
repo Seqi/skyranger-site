@@ -8,6 +8,9 @@ var soldierWriter = require('../src/soldier-writer');
 var newSoldier = soldierWriter(testPerson)
 var result = reader(newSoldier).getSoldiers();
 
+// It should really be testing the functions which write each {'name', 'type', 'weirdNum', 'val } entry
+// since then you'd be sure they're always the correct types if the function itself is tested
+
 describe('Generated object', function () {
   describe('Object', function() {
     it('should contain the expected keys', function() {
@@ -65,5 +68,3 @@ describe('Generated object', function () {
     })
   })
 })
-
-//console.log(JSON.stringify(result, null, 4));
