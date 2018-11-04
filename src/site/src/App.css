@@ -1,0 +1,71 @@
+body {
+    background-image: url("./background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Play", sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+hr {
+    width: 80%;
+    border-color: #13d0ca;
+}
+
+p {
+    color: #fff;
+    text-align: center;
+}
+
+li {
+    color: #fff;
+}
+
+.xcom-txt {
+    color: #13d0ca;
+    letter-spacing: -3px;
+}
+
+.xcom-btn {
+    font-size: 2em;
+    letter-spacing: -3px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #13d0ca;
+    text-transform: uppercase;
+}
+
+#container {
+    height: 100%;
+    margin: auto;
+    width: 70%;
+    max-width: 1200px;
+}
+
+#main-container {
+    margin: 20% auto 10% auto;
+}
+
+.content-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: auto;
+    border: 2px solid #13d0ca;
+    padding: 10px;
+}
+
+.xlrg-txt {
+    font-size: 4em;
+}
+
+.lrg-txt {
+    font-size: 2.5em;
+}
+
+.med-txt {
+    font-size: 1.75em;
+}
+
+.xsml-txt {
+    font-size: 0.5em;
+}

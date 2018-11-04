@@ -1,0 +1,6 @@
+node_modules
+.npm-debug.log
+reading.md
+writing.md 
+test
+*.dev.js

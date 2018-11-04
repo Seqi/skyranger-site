@@ -1,0 +1,24 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "rules": {
+        "indent": ["error", "tab"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"],
+        "dot-location": ["error", "property"],
+        "no-var": "error",
+        "no-console": "warn",
+        "no-useless-escape": "error",
+        "no-useless-return": "error",
+        "comma-spacing": ["error", { "before": false, "after": true }],
+        "keyword-spacing": ["warn", { "before": true, "after": true }],
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }]
+    }
+}

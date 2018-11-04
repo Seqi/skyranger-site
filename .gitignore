@@ -1,0 +1,6 @@
+.vscode
+**/node_modules
+**/npm-debug.log
+*.dev.js
+src/site/src/config.js
+src/site/build

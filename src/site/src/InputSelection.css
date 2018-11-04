@@ -1,0 +1,25 @@
+.input-container {
+    margin-top: 5%;
+    font-size: 1.5em;
+}
+
+.input-container input:not([type="checkbox"]) {
+    width: 100%;
+    letter-spacing: -1px;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+#selection-btns {
+    text-align: center;
+}
+
+#selection-btns button {
+    min-width: 150px;
+    margin: 0px 10px;
+}
+
+#selection-btns-container {
+    display: inline-block;
+    margin: auto;
+}
