@@ -7,7 +7,7 @@ class Header extends React.Component {
 		return (
 			<div className="header">
 				<img alt="" src="https://cdn.jsdelivr.net/npm/simple-icons@1.2.7/icons/github.svg" />
-				<a target="_blank" rel="noopener noreferrer" href="http://www.github.com/seqi/xcom2charactergen">
+				<a target="_blank" rel="noopener noreferrer" href="http://www.github.com/seqi/skyranger-site">
 					Github
 				</a>
 			</div>
