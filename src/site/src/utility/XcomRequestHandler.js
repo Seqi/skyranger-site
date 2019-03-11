@@ -13,12 +13,8 @@ export default function XcomRequestHandler(soldiers) {
 		body: JSON.stringify(soldiers)
 	})
 
-	return new Promise((resolve, reject) => {
-		fetch(request)
-			.then(result => result.json())
-			.then(obj => base64.toByteArray(obj.data))
-			.then(binary => fileDownload(binary, 'Custom.bin'))
-			.then(resolve())
-			.catch(err => reject(err))
-	})
+	return fetch(request)
+		.then(result => result.json())
+		.then(obj => base64.toByteArray(obj.data))
+		.then(binary => fileDownload(binary, 'Custom.bin'))
 }
