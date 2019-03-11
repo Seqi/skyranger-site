@@ -1,36 +1,36 @@
 {
-    "name": "xcom2soldierapi",
-    "version": "1.0.0",
-    "description": "An API for reading and creating XCOM2 Character Pool files.",
-    "main": "src/app.js",
-    "directories": {
-        "test": "test"
-    },
-    "scripts": {
-        "start": "node src/app.js",
-        "site": "cd src/site && npm start",
-        "test": "mocha",
-        "lint": "eslint ./**/*.js",
-        "lint-fix": "eslint **/*.js --fix",
-        "heroku-prebuild": "cd src/site && npm install --prod && npm run build"
-    },
-    "keywords": [
-        "xcom2",
-        "api"
-    ],
-    "author": "Seqi",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.18.3",
-        "cors": "^2.8.4",
-        "express": "^4.16.4",
-        "oauth": "^0.9.15",
-        "skyranger": "^1.0.4"
-    },
-    "devDependencies": {
-        "eslint": "^5.8.0",
-        "eslint-plugin-react": "^7.11.1",
-        "prettier": "^1.14.3",
-        "prettier-eslint": "^8.8.2"
-    }
+	"name": "xcom2soldierapi",
+	"version": "1.0.0",
+	"description": "An API for reading and creating XCOM2 Character Pool files.",
+	"main": "src/app.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"start": "node src/app.js",
+		"site": "cd src/site && npm start",
+		"test": "mocha",
+		"lint": "eslint ./**/*.js",
+		"lint-fix": "eslint **/*.js --fix",
+		"gcp-build": "cd src/site && npm install --prod && npm run build"
+	},
+	"keywords": [
+		"xcom2",
+		"api"
+	],
+	"author": "Seqi",
+	"license": "ISC",
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"cors": "^2.8.4",
+		"express": "^4.16.4",
+		"oauth": "^0.9.15",
+		"skyranger": "^1.0.4"
+	},
+	"devDependencies": {
+		"eslint": "5.12.0",
+		"eslint-plugin-react": "^7.11.1",
+		"prettier": "^1.14.3",
+		"prettier-eslint": "^8.8.2"
+	}
 }
