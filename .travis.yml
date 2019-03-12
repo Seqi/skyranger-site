@@ -1,14 +1,16 @@
 language: node_js
 cache:
-    directories:
-        - node_modules
-        - src/site/node_modules
+  directories:
+  - node_modules
+  - src/site/node_modules
 script: echo 'No steps necessary'
 before_install:
-    - openssl aes-256-cbc -K $encrypted_a228ec39ecae_key -iv $encrypted_a228ec39ecae_iv -in client-secret.json.enc -out
-      .\\client-secret.json -d
+- openssl aes-256-cbc -K $encrypted_5fdff8280ea8_key -iv $encrypted_5fdff8280ea8_iv
+  -in client-secret.json.enc -out client-secret.json -d
+- openssl aes-256-cbc -K $encrypted_a228ec39ecae_key -iv $encrypted_a228ec39ecae_iv
+  -in client-secret.json.enc -out .\\client-secret.json -d
 deploy:
-    provider: gae
-    keyfile: client-secret.json
-    project: skyranger
-    on: release
+  provider: gae
+  keyfile: client-secret.json
+  project: skyranger
+  on: release
