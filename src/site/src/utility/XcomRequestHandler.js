@@ -1,9 +1,8 @@
 import base64 from 'base64-js'
 import fileDownload from 'js-file-download'
-import config from '../config'
 
 export default function XcomRequestHandler(soldiers) {
-	const url = `${config.apiUrl}/generate`
+	const url = '/generate'
 
 	let request = new Request(url, {
 		method: 'POST',

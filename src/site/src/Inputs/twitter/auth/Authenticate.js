@@ -1,11 +1,10 @@
 import React from 'react'
 
-import config from '../../../config'
 import '../TwitterInput.css'
 
 class Authenticate extends React.Component {
 	authenticate() {
-		const url = `${config.apiUrl}/twitter/requestToken`
+		const url = '/twitter/requestToken'
 
 		let request = new Request(url, {
 			method: 'GET',

@@ -6,7 +6,6 @@ import FollowerListComponent from './FollowerListComponent'
 
 import SoldierParser from './SoldierParser'
 import XcomRequestHandler from '../../../utility/XcomRequestHandler'
-import config from '../../../config'
 
 import './FollowersComponent.css'
 
@@ -49,7 +48,7 @@ class FollowersComponent extends React.Component {
 
 		let token = sessionStorage.getItem('id')
 
-		const url = `${config.apiUrl}/twitter/followers`
+		const url = '/twitter/followers'
 		let request = new Request(url, {
 			method: 'POST',
 			headers: {
