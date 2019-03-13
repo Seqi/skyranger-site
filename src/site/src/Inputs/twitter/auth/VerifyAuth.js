@@ -1,11 +1,9 @@
-import config from '../../../config'
-
 export function ValidateId() {
 	let token = sessionStorage.getItem('id')
 
 	if (!token) return Promise.reject()
 
-	let request = buildRequest(`${config.apiUrl}/twitter/userExists`, { token })
+	let request = buildRequest('/twitter/userExists', { token })
 
 	return fetch(request).then(res => {
 		if (res.status !== 204) {
@@ -17,7 +15,7 @@ export function ValidateId() {
 export function SaveId(token, verifier) {
 	if (!token && !verifier) return Promise.reject()
 
-	let request = buildRequest(`${config.apiUrl}/twitter/verify`, {
+	let request = buildRequest('/twitter/verify', {
 		token,
 		verifier
 	})
