@@ -15,4 +15,6 @@ deploy:
     provider: gae
     keyfile: client-secret.json
     project: skyranger
+    # Needed so we don't remove the updated app.yaml
+    skip_cleanup: true
     on: release
