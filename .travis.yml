@@ -9,7 +9,7 @@ before_install:
     - openssl aes-256-cbc -K $encrypted_5fdff8280ea8_key -iv $encrypted_5fdff8280ea8_iv -in client-secret.json.enc -out
       client-secret.json -d
 script: echo 'No steps necessary'
-after_script:
+before_deploy:
     - node deploy/env.js TWITTER_APIKEY $TWITTER_APIKEY TWITTER_APISECRET $TWITTER_APISECRET
 deploy:
     provider: gae
