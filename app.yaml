@@ -1,1 +1,4 @@
 runtime: nodejs8
+env_variables:
+    TWITTER_APIKEY: __TWITTER_APIKEY__
+    TWITTER_APISECRET: __TWITTER_APISECRET__
