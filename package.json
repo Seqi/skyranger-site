@@ -12,7 +12,6 @@
         "test": "mocha",
         "lint": "eslint ./**/*.js",
         "lint-fix": "eslint **/*.js --fix",
-        "heroku-prebuild": "cd src/site && npm install --prod && npm run build"
     },
     "keywords": [
         "xcom2",
