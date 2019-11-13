@@ -28,7 +28,7 @@
         "skyranger": "^1.0.4"
     },
     "devDependencies": {
-        "eslint": "^5.8.0",
+        "eslint": "^6.2.0",
         "eslint-plugin-react": "^7.11.1",
         "prettier": "^1.14.3",
         "prettier-eslint": "^8.8.2"
